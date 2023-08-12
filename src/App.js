@@ -5,6 +5,7 @@ import './App.css';
 import { Personal } from './components/personal/personal';
 import { Player } from './components/player/player';
 import { Search } from './components/searchblock/search';
+import { Logo } from './logo/logo';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
 
         <nav className="main__nav nav">
             <div className="nav__logo logo">
-              <img className="logo__image" src="img/logo.png" alt="logo" />
+              <Logo />
             </div>
+            
             <div className="nav__burger burger">
               <span className="burger__line" />
               <span className="burger__line" />
