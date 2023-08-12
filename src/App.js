@@ -8,6 +8,7 @@ import { Personal } from './components/personal/personal';
 import { Player } from './components/player/player';
 import { Playlist } from './components/playlist/playlist';
 import { Search } from './components/searchblock/search';
+import { Sidebar } from './components/sidebar/sidebar';
 import { Logo } from './logo/logo';
 
 function App() {
@@ -48,37 +49,10 @@ function App() {
               <Personal />
             </section>
 
-            <div className="sidebar__block">
-              <div className="sidebar__list">
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist01.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist02.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
-                <div className="sidebar__item">
-                  <a className="sidebar__link" href="#">
-                    <img
-                      className="sidebar__img"
-                      src="img/playlist03.png"
-                      alt="day's playlist"
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
+            <section>
+              <Sidebar />
+            </section>
+            
           </div>
         </main>
 
