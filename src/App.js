@@ -3,13 +3,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import './App.css';
 import { Player } from './components/player/player';
+import { Search } from './components/searchblock/search';
 
 function App() {
   return (
     <div className="wrapper">
       <div className="container">
         <main className="main">
-          <nav className="main__nav nav">
+
+        <nav className="main__nav nav">
             <div className="nav__logo logo">
               <img className="logo__image" src="img/logo.png" alt="logo" />
             </div>
@@ -32,18 +34,13 @@ function App() {
               </ul>
             </div>
           </nav>
+
           <div className="main__centerblock centerblock">
-            <div className="centerblock__search search">
-              <svg className="search__svg">
-                <use xlinkHref ="img/icon/sprite.svg#icon-search" />
-              </svg>
-              <input
-                className="search__text"
-                type="search"
-                placeholder="Поиск"
-                name="search"
-              />
-            </div>
+
+            <section>
+              <Search />
+            </section>
+
             <h2 className="centerblock__h2">Треки</h2>
             <div className="centerblock__filter filter">
               <div className="filter__title">Искать по:</div>
@@ -640,9 +637,11 @@ function App() {
             </div>
           </div>
         </main>
+
         <section>
-        <Player />
+          <Player />
         </section>
+
         <footer className="footer" />
       </div>
     </div>
