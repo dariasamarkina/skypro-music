@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import './App.css';
+import { Personal } from './components/personal/personal';
 import { Player } from './components/player/player';
 import { Search } from './components/searchblock/search';
 
@@ -596,14 +597,11 @@ function App() {
             </div>
           </div>
           <div className="main__sidebar sidebar">
-            <div className="sidebar__personal">
-              <p className="sidebar__personal-name">Sergey.Ivanov</p>
-              <div className="sidebar__icon">
-                <svg alt="logout">
-                  <use xlinkHref ="img/icon/sprite.svg#logout" />
-                </svg>
-              </div>
-            </div>
+
+            <section>
+              <Personal />
+            </section>
+
             <div className="sidebar__block">
               <div className="sidebar__list">
                 <div className="sidebar__item">
