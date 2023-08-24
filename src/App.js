@@ -1,69 +1,30 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/control-has-associated-label */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import './App.css';
-import { Filter } from './components/filter/filter';
-import { Navigation } from './components/navmenu/nav';
-import { Personal } from './components/personal/personal';
-import { Player } from './components/player/player';
-import { Playlist } from './components/playlist/playlist';
-import { Search } from './components/searchblock/search';
-import { Sidebar } from './components/sidebar/sidebar';
-import { Logo } from './logo/logo';
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-duplicates */
+/* eslint-disable no-unused-vars */
+import './App.css'
+import React from 'react';
+import { useState, useEffect } from 'react';
+import { Bar } from './components/bar/bar';
+import { Main } from './components/main/main';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
+  useEffect(() => {
+    const changeState = () => setIsLoading(!isLoading)
+    const timer =setTimeout(changeState, 5000)
+
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <div className="wrapper">
       <div className="container">
-        <main className="main">
-
-        <nav className="main__nav nav">
-            <div className="nav__logo logo">
-              <Logo />
-            </div>
-            
-            <section>
-              <Navigation />
-            </section>
-
-          </nav>
-
-          <div className="main__centerblock centerblock">
-
-            <section>
-              <Search />
-            </section>
-
-            <h2 className="centerblock__h2">Треки</h2>
-
-            <Filter />
-
-            <div className="centerblock__content">
-              <Playlist />
-            </div>
-            
-          </div>
-          <div className="main__sidebar sidebar">
-
-            <section>
-              <Personal />
-            </section>
-
-            <section>
-              <Sidebar />
-            </section>
-            
-          </div>
-        </main>
-
-        <section>
-          <Player />
-        </section>
-
-        <footer className="footer" />
+        <Main isLoading={isLoading}/>
+        <Bar isLoading={isLoading}/>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
