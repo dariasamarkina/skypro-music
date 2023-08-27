@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import './nav.css';
 import React from 'react';
+import * as S from './styles';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Navigation() {
@@ -10,38 +10,38 @@ export function Navigation() {
   const toggleVisibility = () => setVisibility(!visible)
 
   return (
-    <nav className="main__nav nav">
-      <div className="nav__logo logo">
-        <img className="logo__image" src="img/logo.png" alt="logo" />
-      </div>
+    <S.MainNav>
+      <S.NavLogo>
+        <S.LogoImage src="img/logo.png" alt="logo" />
+      </S.NavLogo>
       <a onClick={toggleVisibility}>
-        <div className="nav__burger burger">
-          <span className="burger__line" />
-          <span className="burger__line" />
-          <span className="burger__line" />
-        </div>
+        <S.NavBurger>
+          <S.BurgerLine />
+          <S.BurgerLine />
+          <S.BurgerLine />
+        </S.NavBurger>
       </a>
       {visible && (
-        <div className="nav__menu menu">
-          <ul className="menu__list">
-            <li className="menu__item">
-              <a href="#" className="menu__link">
+        <S.NavMenu>
+          <S.MenuList>
+            <S.MenuItem>
+              <S.MenuLink href="#">
                 Главное
-              </a>
-            </li>
-            <li className="menu__item">
-              <a href="#" className="menu__link">
+              </S.MenuLink>
+            </S.MenuItem>
+            <S.MenuItem>
+              <S.MenuLink href="#">
                 Мой плейлист
-              </a>
-            </li>
-            <li className="menu__item">
-              <a href="../signin.html" className="menu__link">
+              </S.MenuLink>
+            </S.MenuItem>
+            <S.MenuItem>
+              <S.MenuLink href="../signin.html">
                 Войти
-              </a>
-            </li>
-          </ul>
-        </div>
+              </S.MenuLink>
+            </S.MenuItem>
+          </S.MenuList>
+        </S.NavMenu>
       )}
-    </nav>
+    </S.MainNav>
   )
 }
