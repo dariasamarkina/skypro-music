@@ -4,54 +4,157 @@
 /* eslint-disable no-unused-vars */
 import './filter.css';
 import React, { useState } from 'react';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { styled } from 'styled-components';
+
+const StyledFilterScroll = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin-top: 10px;
+  width: 248px;
+  height: 305px;
+  padding: 34px;
+  background-color: #313131;
+  border-radius: 12px;
+`
+
+const StyledFilterTextListUl = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-sizing: border-box;
+  height: 241px;
+  list-style: none;
+  overflow-y: scroll;
+  scrollbar-color: gray;
+
+  &::-webkit-scrollbar {
+    background-color: #313131;
+    width: 4px;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+  
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #4b4949;
+  }
+`
+
+const StyledFilterText = styled.li`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: none;
+  color: #fff;
+
+  &:hover {
+    text-decoration: underline;
+    color: #b672ff;
+    cursor: pointer;
+  }
+`
+
+const StyledCenterblockFilter = styled.div`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 51px;
+`
+
+const StyledFilterTitle = styled.div`
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-right: 15px;
+`
+
+const StyledFilterBlock = styled.div`
+  display: flex;
+  gap: 10px;
+`
+
+const StyledFilterItems = styled.div`
+`
+
+const StyledFilterButton = styled.div`
+  position: relative;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+`
+
+const StyledFilterActive = styled.div`
+  border-color: #b672ff;
+  color: #b672ff;
+`
+
+// const Styled = styled.``
 
 function PerformerListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">Nero</li>
-        <li className="filter__text">Dynoro, Outwork, Mr. Gee</li>
-        <li className="filter__text">Ali Backgor</li>
-        <li className="filter__text">Стоункат, Psychopath</li>
-        <li className="filter__text">Jaded, Will Clarke, AR/CO</li>
-        <li className="filter__text">Blue Fountain, Zeds Dead</li>
-        <li className="filter__text">
+    <StyledFilterScroll>
+      <StyledFilterTextListUl>
+        <StyledFilterText>Nero</StyledFilterText>
+        <StyledFilterText>Dynoro, Outwork, Mr. Gee</StyledFilterText>
+        <StyledFilterText>Ali Backgor</StyledFilterText>
+        <StyledFilterText>Стоункат, Psychopath</StyledFilterText>
+        <StyledFilterText>Jaded, Will Clarke, AR/CO</StyledFilterText>
+        <StyledFilterText>Blue Fountain, Zeds Dead</StyledFilterText>
+        <StyledFilterText>
           HYBIT, Mr. Black, Offer Nissim, Hi Profile
-        </li>
-        <li className="filter__text">minthaze</li>
-        <li className="filter__text">Calvin Harris, Disciples</li>
-        <li className="filter__text">Tom Boxer</li>
-      </ul>
-    </div>
+        </StyledFilterText>
+        <StyledFilterText>minthaze</StyledFilterText>
+        <StyledFilterText>Calvin Harris, Disciples</StyledFilterText>
+        <StyledFilterText>Tom Boxer</StyledFilterText>
+      </StyledFilterTextListUl>
+    </StyledFilterScroll>
   )
 }
 
 function YearListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">По умолчанию</li>
-        <li className="filter__text">Сначала новые</li>
-        <li className="filter__text">Сначала старые</li>
-      </ul>
-    </div>
+    <StyledFilterScroll>
+      <StyledFilterTextListUl>
+        <StyledFilterText>По умолчанию</StyledFilterText>
+        <StyledFilterText>Сначала новые</StyledFilterText>
+        <StyledFilterText>Сначала старые</StyledFilterText>
+      </StyledFilterTextListUl>
+    </StyledFilterScroll>
   )
 }
 
 function GenreListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">Хип-хоп</li>
-        <li className="filter__text">Поп-музыка</li>
-        <li className="filter__text">Техно</li>
-        <li className="filter__text">Инди</li>
-        <li className="filter__text">Рок-музыка</li>
-        <li className="filter__text">Кантри</li>
-        <li className="filter__text">Джаз</li>
-        <li className="filter__text">Классическая</li>
-      </ul>
-    </div>
+    <StyledFilterScroll>
+      <StyledFilterTextListUl>
+        <StyledFilterText>Хип-хоп</StyledFilterText>
+        <StyledFilterText>Поп-музыка</StyledFilterText>
+        <StyledFilterText>Техно</StyledFilterText>
+        <StyledFilterText>Инди</StyledFilterText>
+        <StyledFilterText>Рок-музыка</StyledFilterText>
+        <StyledFilterText>Кантри</StyledFilterText>
+        <StyledFilterText>Джаз</StyledFilterText>
+        <StyledFilterText>Классическая</StyledFilterText>
+      </StyledFilterTextListUl>
+    </StyledFilterScroll>
   )
 }
 
@@ -79,10 +182,10 @@ export function Filter() {
   }
 
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
-      <div className="filter__block">
-        <div className="filter__items">
+    <StyledCenterblockFilter>
+      <StyledFilterTitle>Искать по:</StyledFilterTitle>
+      <StyledFilterBlock>
+        <StyledFilterItems>
           <div
             className={`filter__button button-author _btn-text ${
               performerFilter ? 'filter-active' : null
@@ -92,9 +195,9 @@ export function Filter() {
             исполнителю
           </div>
           {performerFilter ? <PerformerListFilter /> : null}
-        </div>
+        </StyledFilterItems>
 
-        <div className="filter__items">
+        <StyledFilterItems>
           <div
             className={`filter__button button-year _btn-text ${
               yearFilter ? 'filter-active' : null
@@ -104,9 +207,9 @@ export function Filter() {
             году выпуска
           </div>
           {yearFilter ? <YearListFilter /> : null}
-        </div>
+        </StyledFilterItems>
 
-        <div className="filter__items">
+        <StyledFilterItems>
           <div
             className={`filter__button button-genre _btn-text ${
               genreFilter ? 'filter-active' : null
@@ -116,8 +219,8 @@ export function Filter() {
             жанру
           </div>
           {genreFilter ? <GenreListFilter /> : null}
-        </div>
-      </div>
-    </div>
+        </StyledFilterItems>
+      </StyledFilterBlock>
+    </StyledCenterblockFilter>
   )
 }
