@@ -1,12 +1,12 @@
-import './playlist.css';
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import * as S from './styles';
 import { PlaylistItem } from '../playlistitem/playlistitem';
 import { SkeletonPlaylistItems } from '../skeleton';
 
 function PLaylistAllItems() {
   return (
-    <div className="content__playlist-items">
+    <S.ContentPlaylistItems>
       <PlaylistItem
         track={{
           title: 'Guilt',
@@ -130,13 +130,13 @@ function PLaylistAllItems() {
           time: '3:36',
         }}
       />
-    </div>
+    </S.ContentPlaylistItems>
   )
 }
 
 // eslint-disable-next-line import/prefer-default-export
 export function Playlist({ isLoading }) {
-  return <div className="content__playlist playlist">
+  return <S.ContentPlaylist>
     {isLoading ? <SkeletonPlaylistItems/> : <PLaylistAllItems/>}
-  </div>
+  </S.ContentPlaylist>
 }
