@@ -1,4 +1,4 @@
-import * as S from './styles'
+import * as S from './styles';
 import { Navigation } from '../navmenu/nav';
 import { Filter } from '../filter/filter';
 import { PlaylistHeader } from '../playlistheader/playlistheader';

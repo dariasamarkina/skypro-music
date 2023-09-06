@@ -2,11 +2,13 @@
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-duplicates */
 /* eslint-disable no-unused-vars */
-import './App.css'
+
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Bar } from './components/bar/bar';
 import { Main } from './components/main/main';
+import GlobalStyle from './styles';
+import * as S from './styles';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -18,12 +20,13 @@ function App() {
   }, [])
 
   return (
-    <div className="wrapper">
-      <div className="container">
+    <S.Wrapper>
+      <GlobalStyle />
+      <S.Container>
         <Main isLoading={isLoading}/>
         <Bar isLoading={isLoading}/>
-      </div>
-    </div>
+      </S.Container>
+    </S.Wrapper>
   )
 }
 
