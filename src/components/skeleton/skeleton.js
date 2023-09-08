@@ -1,3 +1,5 @@
+import * as S from './styles';
+
 function Skeleton({ width, height }) {
     const style = {
       width,
@@ -9,62 +11,62 @@ function Skeleton({ width, height }) {
   
   export function SkeletonPlayer() {
     return (
-      <div className="track-play__contain">
-        <div className="track-play__image loading">
+      <S.TrackPlaycontain>
+        <S.TrackPlayImage>
           <Skeleton width="51px" height="51px"/>
-        </div>
-        <div className="track-play__author loading">
+        </S.TrackPlayImage>
+        <S.TrackPlayAuthor>
           <Skeleton width="59px" height="15px"/>
-        </div>
-        <div className="track-play__album loading">
+        </S.TrackPlayAuthor>
+        <S.TrackPlayAlbum>
           <Skeleton width="59px" height="15px"/>
-        </div>
-      </div>
+        </S.TrackPlayAlbum>
+      </S.TrackPlaycontain>
     )
   }
   
   export function SkeletonSidebarList() {
     return (
-      <div className="sidebar__list">
-        <div className="sidebar__item loading">
+      <S.SidebarList>
+        <S.SidebarItem>
           <Skeleton width="250px" height="150px"/>
-        </div>
-        <div className="sidebar__item loading">
+        </S.SidebarItem>
+        <S.SidebarItem>
           <Skeleton width="250px" height="150px"/>
-        </div>
-        <div className="sidebar__item loading">
+        </S.SidebarItem>
+        <S.SidebarItem>
           <Skeleton width="250px" height="150px"/>
-        </div>
-      </div>
+        </S.SidebarItem>
+      </S.SidebarList>
     )
   }
   
   function SkeletonPlaylistItemPattern() {
     return (
-      <div className="playlist__item">
-        <div className="playlist__track track">
-          <div className="track__title">
-            <div className="track__title-image loading">
+      <S.PlaylistItem>
+        <S.PlaylistTrack>
+          <S.TrackTitle>
+            <S.TrackTitleImage>
               <Skeleton width="51px" height="51px"/>
-            </div>
-            <div className="track__title-text loading">
+            </S.TrackTitleImage>
+            <S.TrackTitleText>
               <Skeleton width="356px" height="19px"/>
-            </div>
-          </div>
-          <div className="track__author loading">
+            </S.TrackTitleText>
+          </S.TrackTitle>
+          <S.TrackAuthor>
             <Skeleton width="271px" height="19px"/>
-          </div>
-          <div className="track__album loading">
+          </S.TrackAuthor>
+          <S.TrackAlbum>
             <Skeleton width="305px" height="19px"/>
-          </div>
-        </div>
-      </div>
+          </S.TrackAlbum>
+        </S.PlaylistTrack>
+      </S.PlaylistItem>
     )
   }
   
   export function SkeletonPlaylistItems() {
     return (
-      <div className="content__playlist-items">
+      <S.ContentPlaylistItems>
         <SkeletonPlaylistItemPattern/>
         <SkeletonPlaylistItemPattern/>
         <SkeletonPlaylistItemPattern/>
@@ -74,6 +76,6 @@ function Skeleton({ width, height }) {
         <SkeletonPlaylistItemPattern/>
         <SkeletonPlaylistItemPattern/>
         <SkeletonPlaylistItemPattern/>
-      </div>
+      </S.ContentPlaylistItems>
     )
   }

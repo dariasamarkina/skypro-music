@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import * as S from './styles';
-import { SkeletonPlayer } from '../skeleton';
+import { SkeletonPlayer } from '../skeleton/skeleton';
 
 function TrackPlayerLoaded() {
   return <S.TrackPlaycontain>

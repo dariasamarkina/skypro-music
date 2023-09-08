@@ -3,7 +3,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import * as S from './styles';
-import { SkeletonSidebarList } from '../skeleton';
+import { SkeletonSidebarList } from '../skeleton/skeleton';
 
 function SidebarListLoaded() {
   return (

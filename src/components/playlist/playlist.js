@@ -2,7 +2,7 @@
 import React from 'react';
 import * as S from './styles';
 import { PlaylistItem } from '../playlistitem/playlistitem';
-import { SkeletonPlaylistItems } from '../skeleton';
+import { SkeletonPlaylistItems } from '../skeleton/skeleton';
 
 function PLaylistAllItems() {
   return (
