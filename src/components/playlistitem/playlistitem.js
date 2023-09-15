@@ -1,41 +1,42 @@
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React from 'react';
+import * as S from './styles';
 
 export function PlaylistItem({ track }) {
   return (
-    <div className="playlist__item">
-      <div className="playlist__track track">
-        <div className="track__title">
-          <div className="track__title-image">
-            <svg className="track__title-svg" alt="music">
+    <S.PlaylistItem>
+      <S.PlaylistTrack>
+        <S.TrackTitle>
+          <S.TrackTitleImage>
+            <S.TrackTitleSvg alt="music">
               <use xlinkHref="img/icon/sprite.svg#icon-note" />
-            </svg>
-          </div>
-          <div className="track__title-text">
-            <a className="track__title-link" href={track.titleLink}>
+            </S.TrackTitleSvg>
+          </S.TrackTitleImage>
+          <S.TrackTitleText>
+            <S.TrackTitleLink href={track.titleLink}>
               {track.title}
-              <span className="track__title-span">{track.titleSpan}</span>
-            </a>
-          </div>
-        </div>
-        <div className="track__author">
-          <a className="track__author-link" href={track.authorLink}>
+              <S.TrackTitleSpan>{track.titleSpan}</S.TrackTitleSpan>
+            </S.TrackTitleLink>
+          </S.TrackTitleText>
+        </S.TrackTitle>
+        <S.TrackAuthor>
+          <S.TrackAuthorLink href={track.authorLink}>
             {track.author}
-          </a>
-        </div>
-        <div className="track__album">
-          <a className="track__album-link" href={track.albumLink}>
+          </S.TrackAuthorLink>
+        </S.TrackAuthor>
+        <S.TrackAlbum>
+          <S.TrackAlbumLink href={track.albumLink}>
             {track.album}
-          </a>
-        </div>
-        <div className="track__time">
-          <svg className="track__time-svg" alt="time">
+          </S.TrackAlbumLink>
+        </S.TrackAlbum>
+        <S.TrackTime>
+          <S.TrackTimeSvg alt="time">
             <use xlinkHref="img/icon/sprite.svg#icon-like" />
-          </svg>
-          <span className="track__time-text">{track.time}</span>
-        </div>
-      </div>
-    </div>
+          </S.TrackTimeSvg>
+          <S.TrackTimeText>{track.time}</S.TrackTimeText>
+        </S.TrackTime>
+      </S.PlaylistTrack>
+    </S.PlaylistItem>
   )
 }

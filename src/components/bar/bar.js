@@ -1,43 +1,42 @@
 /* eslint-disable import/prefer-default-export */
-import './bar.css';
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Player } from '../player/player';
 import { PlayerControls } from '../platercontrols/playercontrols';
+import * as S from './styles';
 
 const barVolume = (
-  <div className="bar__volume-block volume">
-    <div className="volume__content">
-      <div className="volume__image">
-        <svg className="volume__svg" alt="volume">
+  <S.BarVolumeBlock>
+    <S.VolumeContent>
+      <S.VolumeImage>
+        <S.VolumeSvg alt="volume">
           <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-        </svg>
-      </div>
-      <div className="volume__progress _btn">
-        <input
-          className="volume__progress-line _btn"
+        </S.VolumeSvg>
+      </S.VolumeImage>
+      <S.VolumeProgress>
+        <S.VolumeProgressLine
           type="range"
           name="range"
         />
-      </div>
-    </div>
-  </div>
+      </S.VolumeProgress>
+    </S.VolumeContent>
+  </S.BarVolumeBlock>
 )
 
 export function Bar({ isLoading }) {
   return (
-    <div className="bar">
-      <div className="bar__content">
-        <div className="bar__player-progress" />
-        <div className="bar__player-block">
-          <div className="bar__player player">
+    <S.Bar>
+      <S.BarContent>
+        <S.BarPlayerProgress />
+        <S.BarPlayerBlock>
+          <S.BarPlayer>
             <PlayerControls isLoading={isLoading} />
 
             <Player isLoading={isLoading} />
-          </div>
+          </S.BarPlayer>
           {barVolume}
-        </div>
-      </div>
-    </div>
+        </S.BarPlayerBlock>
+      </S.BarContent>
+    </S.Bar>
   )
 }

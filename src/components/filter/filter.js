@@ -2,56 +2,56 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-vars */
-import './filter.css';
 import React, { useState } from 'react';
+import * as S from './styles';
 
 function PerformerListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">Nero</li>
-        <li className="filter__text">Dynoro, Outwork, Mr. Gee</li>
-        <li className="filter__text">Ali Backgor</li>
-        <li className="filter__text">Стоункат, Psychopath</li>
-        <li className="filter__text">Jaded, Will Clarke, AR/CO</li>
-        <li className="filter__text">Blue Fountain, Zeds Dead</li>
-        <li className="filter__text">
+    <S.FilterScroll>
+      <S.FilterTextListUl>
+        <S.FilterText>Nero</S.FilterText>
+        <S.FilterText>Dynoro, Outwork, Mr. Gee</S.FilterText>
+        <S.FilterText>Ali Backgor</S.FilterText>
+        <S.FilterText>Стоункат, Psychopath</S.FilterText>
+        <S.FilterText>Jaded, Will Clarke, AR/CO</S.FilterText>
+        <S.FilterText>Blue Fountain, Zeds Dead</S.FilterText>
+        <S.FilterText>
           HYBIT, Mr. Black, Offer Nissim, Hi Profile
-        </li>
-        <li className="filter__text">minthaze</li>
-        <li className="filter__text">Calvin Harris, Disciples</li>
-        <li className="filter__text">Tom Boxer</li>
-      </ul>
-    </div>
+        </S.FilterText>
+        <S.FilterText>minthaze</S.FilterText>
+        <S.FilterText>Calvin Harris, Disciples</S.FilterText>
+        <S.FilterText>Tom Boxer</S.FilterText>
+      </S.FilterTextListUl>
+    </S.FilterScroll>
   )
 }
 
 function YearListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">По умолчанию</li>
-        <li className="filter__text">Сначала новые</li>
-        <li className="filter__text">Сначала старые</li>
-      </ul>
-    </div>
+    <S.FilterScroll>
+      <S.FilterTextListUl>
+        <S.FilterText>По умолчанию</S.FilterText>
+        <S.FilterText>Сначала новые</S.FilterText>
+        <S.FilterText>Сначала старые</S.FilterText>
+      </S.FilterTextListUl>
+    </S.FilterScroll>
   )
 }
 
 function GenreListFilter() {
   return (
-    <div className="filter__scroll">
-      <ul className="filter__text-list_ul">
-        <li className="filter__text">Хип-хоп</li>
-        <li className="filter__text">Поп-музыка</li>
-        <li className="filter__text">Техно</li>
-        <li className="filter__text">Инди</li>
-        <li className="filter__text">Рок-музыка</li>
-        <li className="filter__text">Кантри</li>
-        <li className="filter__text">Джаз</li>
-        <li className="filter__text">Классическая</li>
-      </ul>
-    </div>
+    <S.FilterScroll>
+      <S.FilterTextListUl>
+        <S.FilterText>Хип-хоп</S.FilterText>
+        <S.FilterText>Поп-музыка</S.FilterText>
+        <S.FilterText>Техно</S.FilterText>
+        <S.FilterText>Инди</S.FilterText>
+        <S.FilterText>Рок-музыка</S.FilterText>
+        <S.FilterText>Кантри</S.FilterText>
+        <S.FilterText>Джаз</S.FilterText>
+        <S.FilterText>Классическая</S.FilterText>
+      </S.FilterTextListUl>
+    </S.FilterScroll>
   )
 }
 
@@ -79,45 +79,60 @@ export function Filter() {
   }
 
   return (
-    <div className="centerblock__filter filter">
-      <div className="filter__title">Искать по:</div>
-      <div className="filter__block">
-        <div className="filter__items">
-          <div
-            className={`filter__button button-author _btn-text ${
-              performerFilter ? 'filter-active' : null
-            }`}
-            onClick={togglePerformerCategory}
-          >
-            исполнителю
-          </div>
+    <S.CenterblockFilter>
+      <S.FilterTitle>Искать по:</S.FilterTitle>
+      <S.FilterBlock>
+        <S.FilterItems>
+        {performerFilter ? (
+            <S.FilterActive
+              onClick={togglePerformerCategory}
+            > 
+              исполнителю
+            </S.FilterActive>
+          ) : (
+            <S.FilterButton
+              onClick={togglePerformerCategory}
+            >
+              исполнителю
+            </S.FilterButton>
+          )}
           {performerFilter ? <PerformerListFilter /> : null}
-        </div>
+        </S.FilterItems>
 
-        <div className="filter__items">
-          <div
-            className={`filter__button button-year _btn-text ${
-              yearFilter ? 'filter-active' : null
-            }`}
-            onClick={toggleYearCategory}
-          >
-            году выпуска
-          </div>
-          {yearFilter ? <YearListFilter /> : null}
-        </div>
+        <S.FilterItems>
+            {yearFilter ? (
+              <S.FilterActive
+              onClick={toggleYearCategory}
+              >
+                году выпуска
+              </S.FilterActive>
+            ) : (
+              <S.FilterButton
+                onClick={toggleYearCategory}
+                >
+                  году выпуска
+                </S.FilterButton>
+            )}
+            {yearFilter ? <YearListFilter /> : null}
+        </S.FilterItems>
 
-        <div className="filter__items">
-          <div
-            className={`filter__button button-genre _btn-text ${
-              genreFilter ? 'filter-active' : null
-            }`}
-            onClick={toggleGenreCategory}
-          >
-            жанру
-          </div>
-          {genreFilter ? <GenreListFilter /> : null}
-        </div>
-      </div>
-    </div>
+        <S.FilterItems>
+          {genreFilter ? (
+              <S.FilterActive
+                onClick={toggleGenreCategory}
+              >
+                жанру
+              </S.FilterActive>
+            ) : (
+              <S.FilterButton
+                onClick={toggleGenreCategory}
+              >
+                жанру
+              </S.FilterButton>
+            )}
+            {genreFilter ? <GenreListFilter /> : null}
+        </S.FilterItems>
+      </S.FilterBlock>
+    </S.CenterblockFilter>
   )
 }
