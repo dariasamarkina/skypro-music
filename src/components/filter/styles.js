@@ -94,15 +94,7 @@ export const FilterButton = styled.div`
   padding: 6px 20px;
 `
 
-export const FilterActive = styled.div`
-  position: relative;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  border: 1px solid #ffffff;
-  border-radius: 60px;
-  padding: 6px 20px;
+export const FilterActive = styled(FilterButton)`
   border-color: #b672ff;
   color: #b672ff;
 `

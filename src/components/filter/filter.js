@@ -83,39 +83,54 @@ export function Filter() {
       <S.FilterTitle>Искать по:</S.FilterTitle>
       <S.FilterBlock>
         <S.FilterItems>
-          <div
-            className={`filter__button button-author _btn-text ${
-              performerFilter ? 'filter-active' : null
-            }`}
-            onClick={togglePerformerCategory}
-          >
-            исполнителю
-          </div>
+        {performerFilter ? (
+            <S.FilterActive
+              onClick={togglePerformerCategory}
+            > 
+              исполнителю
+            </S.FilterActive>
+          ) : (
+            <S.FilterButton
+              onClick={togglePerformerCategory}
+            >
+              исполнителю
+            </S.FilterButton>
+          )}
           {performerFilter ? <PerformerListFilter /> : null}
         </S.FilterItems>
 
         <S.FilterItems>
-          <div
-            className={`filter__button button-year _btn-text ${
-              yearFilter ? 'filter-active' : null
-            }`}
-            onClick={toggleYearCategory}
-          >
-            году выпуска
-          </div>
-          {yearFilter ? <YearListFilter /> : null}
+            {yearFilter ? (
+              <S.FilterActive
+              onClick={toggleYearCategory}
+              >
+                году выпуска
+              </S.FilterActive>
+            ) : (
+              <S.FilterButton
+                onClick={toggleYearCategory}
+                >
+                  году выпуска
+                </S.FilterButton>
+            )}
+            {yearFilter ? <YearListFilter /> : null}
         </S.FilterItems>
 
         <S.FilterItems>
-          <div
-            className={`filter__button button-genre _btn-text ${
-              genreFilter ? 'filter-active' : null
-            }`}
-            onClick={toggleGenreCategory}
-          >
-            жанру
-          </div>
-          {genreFilter ? <GenreListFilter /> : null}
+          {genreFilter ? (
+              <S.FilterActive
+                onClick={toggleGenreCategory}
+              >
+                жанру
+              </S.FilterActive>
+            ) : (
+              <S.FilterButton
+                onClick={toggleGenreCategory}
+              >
+                жанру
+              </S.FilterButton>
+            )}
+            {genreFilter ? <GenreListFilter /> : null}
         </S.FilterItems>
       </S.FilterBlock>
     </S.CenterblockFilter>
