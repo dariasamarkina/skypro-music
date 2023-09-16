@@ -8,8 +8,8 @@ import * as S from './styles';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Navigation() {
-  const [visible, setVisibility] = React.useState(false)
-  const toggleVisibility = () => setVisibility(!visible)
+  const [visible, setVisibility] = React.useState(false);
+  const toggleVisibility = () => setVisibility(!visible);
 
   return (
     <S.MainNav>
@@ -31,7 +31,7 @@ export function Navigation() {
 
             <S.MenuItem>
               <Link to="/">
-                <S.MenuLink href="#">
+                <S.MenuLink>
                   Главное
                 </S.MenuLink>
               </Link>

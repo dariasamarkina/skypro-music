@@ -32,57 +32,24 @@ const CategoriesList = ({ categories }) => {
 
 function SidebarListLoaded() {
   return <CategoriesList categories={CATEGORIES} />
-  
-  
-  // (
-    // <S.SidebarList>
-
-    //   <S.SidebarItem>
-    //     <Link to="/categories">
-    //       <S.SidebarLink>
-    //         <S.SidebarImg
-    //           src="img/playlist01.png"
-    //           alt="day's playlist"
-    //         />
-    //       </S.SidebarLink>
-    //     </Link>
-    //   </S.SidebarItem>
-
-    //   <S.SidebarItem>
-    //     <Link to="/categories">
-    //       <S.SidebarLink>
-    //         <S.SidebarImg
-    //           src="img/playlist02.png"
-    //           alt="day's playlist"
-    //         />
-    //       </S.SidebarLink>
-    //       </Link>
-    //   </S.SidebarItem>
-      
-
-    //   <S.SidebarItem>
-    //     <Link to="/categories">
-    //       <S.SidebarLink>
-    //         <S.SidebarImg
-    //           src="img/playlist03.png"
-    //           alt="day's playlist"
-    //         />
-    //       </S.SidebarLink>
-    //     </Link>
-    //   </S.SidebarItem>
-    // </S.SidebarList>
-  // )
 }
 
-export function Sidebar({ isLoading }) {
+export function Sidebar({ isLoading, setToken }) {
+  const handleLogOut = () => {
+    localStorage.removeItem('token', 'token');
+    setToken(false);
+  }
+
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>{isLoading ? '' : "Sergey.Ivanov"}</S.SidebarPersonalName>
-        <S.SidebarIcon className="sidebar__icon">
-          <svg alt="logout">
-            <use xlinkHref="img/icon/sprite.svg#logout" />
-          </svg>
+        <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
+          <Link to="/login">
+            <svg alt="logout">
+              <use xlinkHref="img/icon/sprite.svg#logout" />
+            </svg>
+          </Link>
         </S.SidebarIcon>
       </S.SidebarPersonal>
       <S.SidebarBlock>
