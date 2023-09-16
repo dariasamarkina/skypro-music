@@ -1,36 +1,48 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as S from './styles';
 import { SkeletonSidebarList } from '../skeleton/skeleton';
 
 function SidebarListLoaded() {
   return (
     <S.SidebarList>
+
       <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImg
-            src="img/playlist01.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
+        <Link to="/categories">
+          <S.SidebarLink>
+            <S.SidebarImg
+              src="img/playlist01.png"
+              alt="day's playlist"
+            />
+          </S.SidebarLink>
+        </Link>
       </S.SidebarItem>
+
       <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImg
-            src="img/playlist02.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
+        <Link to="/categories">
+          <S.SidebarLink>
+            <S.SidebarImg
+              src="img/playlist02.png"
+              alt="day's playlist"
+            />
+          </S.SidebarLink>
+          </Link>
       </S.SidebarItem>
+      
+
       <S.SidebarItem>
-        <S.SidebarLink href="#">
-          <S.SidebarImg
-            src="img/playlist03.png"
-            alt="day's playlist"
-          />
-        </S.SidebarLink>
+        <Link to="/categories">
+          <S.SidebarLink>
+            <S.SidebarImg
+              src="img/playlist03.png"
+              alt="day's playlist"
+            />
+          </S.SidebarLink>
+        </Link>
       </S.SidebarItem>
     </S.SidebarList>
   )

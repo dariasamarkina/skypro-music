@@ -2,7 +2,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Player } from '../player/player';
-import { PlayerControls } from '../platercontrols/playercontrols';
+import { PlayerControls } from '../playercontrols/playercontrols';
 import * as S from './styles';
 
 const barVolume = (
