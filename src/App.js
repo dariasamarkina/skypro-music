@@ -9,6 +9,7 @@ import { Bar } from './components/bar/bar';
 import { Main } from './components/main/main';
 import GlobalStyle from './styles';
 import * as S from './styles';
+import { AppRoutes } from "./routes";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -22,10 +23,11 @@ function App() {
   return (
     <S.Wrapper>
       <GlobalStyle />
-      <S.Container>
+      <AppRoutes />
+      {/* <S.Container>
         <Main isLoading={isLoading}/>
         <Bar isLoading={isLoading}/>
-      </S.Container>
+      </S.Container> */}
     </S.Wrapper>
   )
 }
