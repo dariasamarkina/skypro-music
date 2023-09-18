@@ -5,8 +5,6 @@
 
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Bar } from './components/bar/bar';
-import { Main } from './components/main/main';
 import GlobalStyle from './styles';
 import * as S from './styles';
 import { AppRoutes } from "./routes";
@@ -27,10 +25,6 @@ function App() {
     <S.Wrapper>
       <GlobalStyle />
       <AppRoutes token={token} setToken={setToken}/>
-      {/* <S.Container>
-        <Main isLoading={isLoading}/>
-        <Bar isLoading={isLoading}/>
-      </S.Container> */}
     </S.Wrapper>
   )
 }
