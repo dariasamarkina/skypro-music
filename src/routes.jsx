@@ -11,28 +11,28 @@ import { Favorites } from "./pages/favorites/fav";
 import { Categories } from "./pages/categories/categories";
 import { ProtectedRoute } from "./components/protectedroute/protectedroute";
 
-export const AppRoutes = ({token, setToken}) => {
+export const AppRoutes = ({setToken}) => {
   return (
     <Routes>
       {/* <Route path="/" element={<Mainpage />} /> */}
       <Route path="/login" element={<Login setToken={setToken} />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/" element={
-          <ProtectedRoute isAllowed={token}>
+          <ProtectedRoute >
             <Mainpage setToken={setToken}/>
           </ProtectedRoute>
         }
        />
       {/* <Route path="/favorites" element={<Favorites />} /> */}
       <Route path="/favorites" element={
-          <ProtectedRoute isAllowed={token}>
+          <ProtectedRoute >
             <Favorites setToken={setToken}/>
           </ProtectedRoute>
         }
       />
       {/* <Route path="/categories/:id" element={<Categories />} /> */}
       <Route path="/categories/:id" element={
-        <ProtectedRoute isAllowed={token}>
+        <ProtectedRoute >
             <Categories setToken={setToken}/>
         </ProtectedRoute>
       }

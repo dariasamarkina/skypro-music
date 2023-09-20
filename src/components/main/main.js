@@ -13,10 +13,8 @@ import { Sidebar } from "../sidebar/sidebar";
 export function Main({ isLoading, setToken }) {
   if (localStorage.getItem('token', 'token')) {
     return (
-      <S.Main 
-      isLoading={isLoading}
-      setToken={setToken}>
-        <Navigation setToken={setToken}/>
+      <S.Main>
+        <Navigation/>
         <S.MainCenterblock>
           <S.CenterblockSearch>
             <S.SearchSvg>

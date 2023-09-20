@@ -20,7 +20,7 @@ export const Mainpage = ({ setToken }) => {
         return (
             <S.Container>
                 <Main isLoading={isLoading} setToken={setToken} />
-                <Bar isLoading={isLoading} setToken={setToken} />
+                <Bar isLoading={isLoading}/>
             </S.Container>
         )
     }
