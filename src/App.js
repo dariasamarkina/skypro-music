@@ -5,13 +5,15 @@
 
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Bar } from './components/bar/bar';
-import { Main } from './components/main/main';
 import GlobalStyle from './styles';
 import * as S from './styles';
+import { AppRoutes } from "./routes";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  const initialToken = localStorage.getItem('token', '');
+  const [token, setToken] = useState(initialToken);
+
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const changeState = () => setIsLoading(!isLoading)
     const timer =setTimeout(changeState, 5000)
@@ -22,10 +24,7 @@ function App() {
   return (
     <S.Wrapper>
       <GlobalStyle />
-      <S.Container>
-        <Main isLoading={isLoading}/>
-        <Bar isLoading={isLoading}/>
-      </S.Container>
+      <AppRoutes token={token} setToken={setToken}/>
     </S.Wrapper>
   )
 }
