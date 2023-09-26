@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable consistent-return */
@@ -9,19 +10,25 @@ import * as S from './styles';
 import { Main } from "../../components/main/main";
 import { Bar } from '../../components/bar/bar';
 import { getAllTracks } from '../../api';
+import { ErrorNotification } from '../../components/error/error';
 
 export const Mainpage = ({ setToken }) => {
-
     const [getTracks, setGetTracks] = useState();
-    useEffect(() => {
-    // eslint-disable-next-line no-console
-    getAllTracks().then((tracks) => {
-        console.log(tracks);
-        setGetTracks(tracks);
-    });
-  }, [])
-
     const [isLoading, setIsLoading] = useState(true);
+    const [getTracksError, setgetTracksError] = useState(null);
+
+        useEffect(() => {
+            // eslint-disable-next-line no-console
+            getAllTracks().then((tracks) => {
+                setGetTracks(tracks);
+            })
+            .catch ((error) => {
+                console.log(error.message);
+                setgetTracksError(error.message)
+            })
+          }, [])
+        
+     
     useEffect(() => {
         const changeState = () => setIsLoading(!isLoading)
         const timer =setTimeout(changeState, 5000)
@@ -29,10 +36,17 @@ export const Mainpage = ({ setToken }) => {
         return () => clearTimeout(timer)
       }, [])
 
+      if (getTracksError) {
+        return (
+            <ErrorNotification />
+        )
+      }
+
     if (localStorage.getItem('token', 'token')) {
         return (
             <S.Container>
                 <Main isLoading={isLoading} setToken={setToken} getTracks={getTracks} />
+                
                 <Bar isLoading={isLoading}/>
             </S.Container>
         )

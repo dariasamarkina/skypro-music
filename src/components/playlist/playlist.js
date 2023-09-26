@@ -12,18 +12,6 @@ function AllTracks({ getTracks }) {
   )
 }
 
-// function PLaylistAllItems({ getTracks, isLoading }) {
-//   return (
-//     <S.ContentPlaylistItems>
-//       {isLoading ? (
-//         <SkeletonPlaylistItems />
-//       ) : (
-//         <AllTracks getTracks={getTracks} />
-//       )}
-//     </S.ContentPlaylistItems>
-//   )
-// }
-
 // eslint-disable-next-line import/prefer-default-export
 export function Playlist({ getTracks, isLoading }) {
   return <S.ContentPlaylist>
