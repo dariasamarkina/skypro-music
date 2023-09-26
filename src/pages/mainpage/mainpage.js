@@ -16,6 +16,7 @@ export const Mainpage = ({ setToken }) => {
     const [getTracks, setGetTracks] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [getTracksError, setgetTracksError] = useState(null);
+    const [PlayTrack, setPlayTrack] = useState(null);
 
         useEffect(() => {
             setIsLoading(true);
@@ -48,9 +49,13 @@ export const Mainpage = ({ setToken }) => {
     if (localStorage.getItem('token', 'token')) {
         return (
             <S.Container>
-                <Main isLoading={isLoading} setToken={setToken} getTracks={getTracks} />
+                <Main 
+                    isLoading={isLoading} 
+                    setToken={setToken} 
+                    getTracks={getTracks}
+                    PlayTrack={PlayTrack} />
                 
-                <Bar isLoading={isLoading}/>
+                {PlayTrack ? <Bar isLoading={isLoading} PlayTrack={PlayTrack} /> : null}
             </S.Container>
         )
     }

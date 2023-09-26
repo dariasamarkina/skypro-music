@@ -4,14 +4,17 @@
 import React from 'react';
 import * as S from './styles';
 
-export function PlaylistItem({ getTracks }) {
+export function PlaylistItem({ getTracks, setPlayTrack }) {
+  const startPlayer = (PlayTrack) => {
+    setPlayTrack(PlayTrack)
+  }
 
   return (
     <>
       {getTracks?.map((track) => (
         
         <S.PlaylistItem key={track.id}>
-          <S.PlaylistTrack>
+          <S.PlaylistTrack onClick={() => startPlayer(track)}>
             <S.TrackTitle>
               <S.TrackTitleImage>
                 <S.TrackTitleSvg alt="music">
@@ -19,7 +22,8 @@ export function PlaylistItem({ getTracks }) {
                 </S.TrackTitleSvg>
               </S.TrackTitleImage>
               <S.TrackTitleText>
-                <S.TrackTitleLink href={track.track_file}>
+                <S.TrackTitleLink>
+                {/* href={track.track_file} */}
                   {track.name}
                   <S.TrackTitleSpan />
                 </S.TrackTitleLink>

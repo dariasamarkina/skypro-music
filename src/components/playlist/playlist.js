@@ -4,17 +4,19 @@ import * as S from './styles';
 import { PlaylistItem } from '../playlistitem/playlistitem';
 import { SkeletonPlaylistItems } from '../skeleton/skeleton';
 
-function AllTracks({ getTracks }) {
+function AllTracks({ getTracks, playTrack }) {
   return(
 
-      <PlaylistItem getTracks={getTracks}/>
+      <PlaylistItem 
+        getTracks={ getTracks} 
+        setPlayTrack={playTrack}/>
 
   )
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function Playlist({ getTracks, isLoading }) {
+export function Playlist({ getTracks, isLoading, playTrack }) {
   return <S.ContentPlaylist>
-    {isLoading ? <SkeletonPlaylistItems/> : <AllTracks getTracks={getTracks}/>}
+    {isLoading ? <SkeletonPlaylistItems/> : <AllTracks getTracks={getTracks} setPlayTrack={playTrack}/>}
   </S.ContentPlaylist>
 }
