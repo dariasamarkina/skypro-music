@@ -14,7 +14,7 @@ import { ProtectedRoute } from "./components/protectedroute/protectedroute";
 export const AppRoutes = ({setToken}) => {
   return (
     <Routes>
-      {/* <Route path="/" element={<Mainpage />} /> */}
+
       <Route path="/login" element={<Login setToken={setToken} />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/" element={
@@ -23,14 +23,14 @@ export const AppRoutes = ({setToken}) => {
           </ProtectedRoute>
         }
        />
-      {/* <Route path="/favorites" element={<Favorites />} /> */}
+
       <Route path="/favorites" element={
           <ProtectedRoute >
             <Favorites setToken={setToken}/>
           </ProtectedRoute>
         }
       />
-      {/* <Route path="/categories/:id" element={<Categories />} /> */}
+
       <Route path="/categories/:id" element={
         <ProtectedRoute >
             <Categories setToken={setToken}/>

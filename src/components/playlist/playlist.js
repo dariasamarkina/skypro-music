@@ -8,8 +8,8 @@ function AllTracks({ getTracks, playTrack }) {
   return(
 
       <PlaylistItem 
-        getTracks={ getTracks} 
-        setPlayTrack={playTrack}/>
+        getTracks={ getTracks } 
+        setPlayTrack={ playTrack }/>
 
   )
 }

@@ -20,10 +20,12 @@ export const Mainpage = ({ setToken }) => {
 
         useEffect(() => {
             setIsLoading(true);
+            
             // eslint-disable-next-line no-console
             getAllTracks().then((tracks) => {
                 setGetTracks(tracks);
                 setIsLoading(false);
+                
             })
             .catch ((error) => {
                 console.log(error.message);
