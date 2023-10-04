@@ -10,7 +10,7 @@ import { Playlist } from "../playlist/playlist";
 import { Sidebar } from "../sidebar/sidebar";
 
 // eslint-disable-next-line import/prefer-default-export
-export function Main({ getTracks, isLoading, setToken, playTrack }) {
+export function Main({ getTracks, isLoading, setToken, setPlayTrack }) {
   if (localStorage.getItem('token', 'token')) {
     return (
       <S.Main>
@@ -33,7 +33,7 @@ export function Main({ getTracks, isLoading, setToken, playTrack }) {
             <Playlist 
               getTracks={getTracks} 
               isLoading={isLoading}
-              playTrack={playTrack}/>
+              setPlayTrack={setPlayTrack}/>
           </S.CenterblockContent>
         </S.MainCenterblock>
         <Sidebar isLoading={isLoading} setToken={setToken}/>
