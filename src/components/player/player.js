@@ -25,10 +25,10 @@ function TrackPlayerLoaded({ PlayTrack }) {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function Player({ isLoading, setPlayTrack }) {
+export function Player({ isLoading, PlayTrack }) {
   return (
     <S.PlayerTrackPlay>
-      {isLoading ? <SkeletonPlayer/> : <TrackPlayerLoaded setPlayTrack={setPlayTrack}/>}
+      {isLoading ? <SkeletonPlayer/> : <TrackPlayerLoaded PlayTrack={PlayTrack}/>}
       <S.TrackPlayLikeDis>
         <S.TrackPlayLike>
           <S.TrackPlayLikeSvg alt="like">

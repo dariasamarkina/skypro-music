@@ -5,8 +5,8 @@ import React from 'react';
 import * as S from './styles';
 
 export function PlaylistItem({ getTracks, setPlayTrack }) {
-  const startPlayer = (PlayTrack) => {
-    setPlayTrack(PlayTrack)
+  const startPlayer = (track) => {
+    setPlayTrack(track)
   }
 
   return (
