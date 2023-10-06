@@ -5,6 +5,9 @@ export const ContentPlaylistItems = styled.div`
 `
 
 export const ContentPlaylist = styled.div`
+  height: 673px;
+  width: 1084px;
+  padding-right: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,4 +16,22 @@ export const ContentPlaylist = styled.div`
   -ms-flex-direction: column;
   flex-direction: column;
   overflow-y: auto;
+
+  // overflow-y: scroll;
+  scrollbar-color: gray;
+
+  &::-webkit-scrollbar {
+    background-color: #313131;
+    width: 4px;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+  
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #4b4949;
 `
