@@ -4,7 +4,7 @@ import React from 'react';
 import * as S from './styles';
 import { SkeletonPlayer } from '../skeleton/skeleton';
 
-function TrackPlayerLoaded() {
+function TrackPlayerLoaded({ PlayTrack }) {
   return <S.TrackPlaycontain>
       <S.TrackPlayImage>
         <S.TraclPlaySvg alt="music">
@@ -13,22 +13,22 @@ function TrackPlayerLoaded() {
       </S.TrackPlayImage>
       <S.TrackPlayAuthor>
         <S.TrackPlatAuthorLink href="http://">
-          Ты та...
+          {PlayTrack.name}
         </S.TrackPlatAuthorLink>
       </S.TrackPlayAuthor>
       <S.TrackPlayAlbum>
         <S.TrackPlatAlbumLink href="http://">
-          Баста
+          {PlayTrack.author}
         </S.TrackPlatAlbumLink>
       </S.TrackPlayAlbum>
     </S.TrackPlaycontain>
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function Player({ isLoading }) {
+export function Player({ isLoading, PlayTrack }) {
   return (
     <S.PlayerTrackPlay>
-      {isLoading ? <SkeletonPlayer/> : <TrackPlayerLoaded/>}
+      {isLoading ? <SkeletonPlayer/> : <TrackPlayerLoaded PlayTrack={PlayTrack}/>}
       <S.TrackPlayLikeDis>
         <S.TrackPlayLike>
           <S.TrackPlayLikeSvg alt="like">
