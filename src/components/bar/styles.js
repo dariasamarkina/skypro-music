@@ -1,6 +1,21 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { styled } from 'styled-components';
 
+export const ProgressTimer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20px 0 20px;
+`
+
+export const TimerValues = styled.p`
+  color: #696969;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.016px;
+`
+
 export const BarVolumeBlock = styled.div`
   width: auto;
   display: -webkit-box;
@@ -101,3 +116,4 @@ export const BarPlayer = styled.div`
   -ms-flex-pack: start;
   justify-content: flex-start;
 `
+
