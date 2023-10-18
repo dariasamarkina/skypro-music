@@ -2,25 +2,49 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-alert */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
+import { registerUser, loginUser } from "../../api";
 
-export function AuthPage({ isLoginMode = false }) {
+export function AuthPage({ isLoginMode = false, setToken }) {
   const [error, setError] = useState(null);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [username, setUsername] = useState('');
+
+  const navigate = useNavigate();
 
   const handleLogin = async ({ email, password }) => {
-    alert(`Выполняется вход: ${email} ${password}`);
-    setError("Неизвестная ошибка входа");
+    // alert(`Выполняется вход: ${email} ${password}`);
+    // setError("Неизвестная ошибка входа");
+    try {
+      const userData = await loginUser({ email, password });
+      localStorage.setItem('token', JSON.stringify(userData.username));
+
+      setToken(userData);
+      navigate('/');
+    } 
+    catch (error) {
+      setError(error.message);
+    }
   };
 
   const handleRegister = async () => {
-    alert(`Выполняется регистрация: ${email} ${password}`);
-    setError("Неизвестная ошибка регистрации");
+    // alert(`Выполняется регистрация: ${email} ${password}`);
+    // setError("Неизвестная ошибка регистрации");
+    try {
+      const userData = await registerUser({ email, password, username});
+      localStorage.setItem('token', JSON.stringify(userData.username));
+
+      setToken(userData);
+      navigate('/');
+    } 
+    catch (error) {
+      setError(error.message);
+    }
   };
 
   // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
@@ -63,7 +87,7 @@ export function AuthPage({ isLoginMode = false }) {
               <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
                 Войти
               </S.PrimaryButton>
-              <Link to="/register">
+              <Link to="/signup">
                 <S.SecondaryButton>Зарегистрироваться</S.SecondaryButton>
               </Link>
             </S.Buttons>
@@ -71,6 +95,15 @@ export function AuthPage({ isLoginMode = false }) {
         ) : (
           <>
             <S.Inputs>
+              <S.ModalInput
+                type="text"
+                name="login"
+                placeholder="Имя"
+                value={username}
+                onChange={(event) => {
+                  setUsername(event.target.value)
+                }}
+              />
               <S.ModalInput
                 type="text"
                 name="login"

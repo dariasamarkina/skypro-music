@@ -11,12 +11,12 @@ import { Favorites } from "./pages/favorites/fav";
 import { Categories } from "./pages/categories/categories";
 import { ProtectedRoute } from "./components/protectedroute/protectedroute";
 
-export const AppRoutes = ({setToken}) => {
+export const AppRoutes = ({ setToken }) => {
   return (
     <Routes>
 
-      <Route path="/login" element={<AuthPage isLoginMode={true} />} />
-      <Route path="/signup" element={<AuthPage isLoginMode={false} />} />
+      <Route path="/login" element={<AuthPage isLoginMode={true} setToken={setToken} />} />
+      <Route path="/signup" element={<AuthPage isLoginMode={false} setToken={setToken}/>} />
       
       <Route path="/" element={
           <ProtectedRoute >
