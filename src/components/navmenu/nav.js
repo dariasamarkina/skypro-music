@@ -1,15 +1,25 @@
+/* eslint-disable import/no-duplicates */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from "react-router-dom";
+import { useContext } from 'react';
 import * as S from './styles';
+import { userContext } from '../../context/userContext';
 
 // eslint-disable-next-line import/prefer-default-export
-export function Navigation() {
+export function Navigation({ setToken }) {
   const [visible, setVisibility] = React.useState(false);
   const toggleVisibility = () => setVisibility(!visible);
+
+  const token = useContext(userContext);
+
+  const handleLogOut = () => {
+    localStorage.removeItem('token', token)
+    setToken(false)
+  }
 
   return (
     <S.MainNav>
@@ -47,8 +57,8 @@ export function Navigation() {
 
             <S.MenuItem>
               <Link to="/login">
-                <S.MenuLink>
-                  Войти
+                <S.MenuLink onClick={handleLogOut}>
+                  Выйти
                 </S.MenuLink>
               </Link>
             </S.MenuItem>

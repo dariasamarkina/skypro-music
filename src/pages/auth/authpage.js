@@ -24,7 +24,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
       const userData = await loginUser({ email, password });
       localStorage.setItem('token', JSON.stringify(userData.username));
 
-      setToken(userData);
+      setToken(userData.username);
       navigate('/');
     } 
     catch (error) {
@@ -39,7 +39,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
       const userData = await registerUser({ email, password, username});
       localStorage.setItem('token', JSON.stringify(userData.username));
 
-      setToken(userData);
+      setToken(userData.username);
       navigate('/');
     } 
     catch (error) {

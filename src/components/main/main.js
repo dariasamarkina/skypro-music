@@ -14,7 +14,7 @@ export function Main({ getTracks, isLoading, setToken, setPlayTrack }) {
   if (localStorage.getItem('token', 'token')) {
     return (
       <S.Main>
-        <Navigation/>
+        <Navigation setToken={setToken}/>
         <S.MainCenterblock>
           <S.CenterblockSearch>
             <S.SearchSvg>
