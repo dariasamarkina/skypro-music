@@ -26,6 +26,8 @@ export async function registerUser({ email, password, username }) {
         },
     })
 
+    console.log(response);
+
     if(response.ok) {
         return response.json()
     // eslint-disable-next-line no-else-return
@@ -47,6 +49,8 @@ export async function loginUser({ email, password }) {
             "content-type": "application/json",
         },
     })
+
+    console.log(response);
 
     if(response.ok) {
         return response.json()

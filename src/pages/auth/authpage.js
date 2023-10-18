@@ -137,6 +137,9 @@ export function AuthPage({ isLoginMode = false, setToken }) {
               <S.PrimaryButton onClick={handleRegister}>
                 Зарегистрироваться
               </S.PrimaryButton>
+              <Link to="/login">
+                <S.SecondaryButton>Войти</S.SecondaryButton>
+              </Link>
             </S.Buttons>
           </>
         )}
