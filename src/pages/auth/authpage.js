@@ -17,26 +17,35 @@ export function AuthPage({ isLoginMode = false, setToken }) {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [username, setUsername] = useState('');
 
+  const [btnBlocked, setBtnBlocked] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async ({ email, password }) => {
+
     if (!email) {
       setError  ('Введите e-mail');
       return
     } else if (!password) {
       setError ('Введите пароль');
       return
-    } else {
-    try {
-      const userData = await loginUser({ email, password });
-      localStorage.setItem('token', JSON.stringify(userData.username));
+    } 
+    else {
+      try {
+        setBtnBlocked(true);
+        
+        const userData = await loginUser({ email, password });
+        localStorage.setItem('token', JSON.stringify(userData.username));
 
-      setToken(userData.username);
-      navigate('/');
-      } 
-      catch (error) {
-        setError(error.message);
-      }
+        setToken(userData.username);
+        navigate('/');
+        } 
+        catch (error) {
+          setError(error.message);
+        } 
+        finally {
+          setBtnBlocked(false);
+        }
     } 
   };
 
@@ -59,17 +68,23 @@ export function AuthPage({ isLoginMode = false, setToken }) {
     else if (password.length < 8) {
       setError ('Пароль слишком короткий. Он должен содержать не менее 8 символов');
       return
-    } else {
-    try {
-      const userData = await registerUser({ email, password, username});
-      localStorage.setItem('token', JSON.stringify(userData.username));
-
-      setToken(userData.username);
-      navigate('/');
     } 
-      catch (error) {
-        setError(error.message);
-      }
+    else {
+      try {
+        setBtnBlocked(true);
+
+        const userData = await registerUser({ email, password, username});
+        localStorage.setItem('token', JSON.stringify(userData.username));
+
+        setToken(userData.username);
+        navigate('/');
+      } 
+        catch (error) {
+          setError(error.message);
+        }
+        finally {
+          setBtnBlocked(false);
+        }
    }
   };
 
@@ -110,7 +125,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={() => handleLogin({ email, password })}>
+              <S.PrimaryButton disabled={btnBlocked} onClick={() => handleLogin({ email, password })}>
                 Войти
               </S.PrimaryButton>
               <Link to="/signup">
@@ -160,7 +175,7 @@ export function AuthPage({ isLoginMode = false, setToken }) {
             </S.Inputs>
             {error && <S.Error>{error}</S.Error>}
             <S.Buttons>
-              <S.PrimaryButton onClick={handleRegister}>
+              <S.PrimaryButton disabled={btnBlocked} onClick={handleRegister}>
                 Зарегистрироваться
               </S.PrimaryButton>
               <Link to="/login">
