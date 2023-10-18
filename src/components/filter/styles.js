@@ -52,7 +52,6 @@ export const FilterText = styled.li`
     cursor: pointer;
   }
 `
-
 export const CenterblockFilter = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
