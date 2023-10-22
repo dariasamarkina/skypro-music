@@ -1,22 +1,23 @@
+/* eslint-disable react/jsx-boolean-value */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/no-extraneous-dependencies */
 import { Routes, Route } from "react-router-dom";
-import { Login } from "./pages/login/login";
+import { AuthPage } from "./pages/auth/authpage"
 import { Mainpage } from "./pages/mainpage/mainpage";
-import { Signup } from "./pages/signup/signup";
 import { Notfound } from "./pages/notfound/notfound";
 import { Favorites } from "./pages/favorites/fav";
 import { Categories } from "./pages/categories/categories";
 import { ProtectedRoute } from "./components/protectedroute/protectedroute";
 
-export const AppRoutes = ({setToken}) => {
+export const AppRoutes = ({ setToken }) => {
   return (
     <Routes>
 
-      <Route path="/login" element={<Login setToken={setToken} />} />
-      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<AuthPage isLoginMode={true} setToken={setToken} />} />
+      <Route path="/signup" element={<AuthPage isLoginMode={false} setToken={setToken}/>} />
+      
       <Route path="/" element={
           <ProtectedRoute >
             <Mainpage setToken={setToken}/>

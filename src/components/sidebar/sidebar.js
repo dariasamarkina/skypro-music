@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 /* eslint-disable react/function-component-definition */
@@ -5,11 +6,12 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { CATEGORIES } from './categories';
 import * as S from './styles';
 import { SkeletonSidebarList } from '../skeleton/skeleton';
+import { userContext } from '../../context/userContext';
 
 const CategoriesList = ({ categories }) => {
   return (
@@ -34,16 +36,25 @@ function SidebarListLoaded() {
   return <CategoriesList categories={CATEGORIES} />
 }
 
-export function Sidebar({ isLoading, setToken }) {
+export function Sidebar({ isLoading }) {
+
+  const [token, setToken] = useContext(userContext);
+  console.log(token);
+
+  const navigate = useNavigate();
+
   const handleLogOut = () => {
-    localStorage.removeItem('token', 'token');
+    localStorage.clear();
     setToken(false);
+    navigate('/login');
   }
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>{isLoading ? '' : "Sergey.Ivanov"}</S.SidebarPersonalName>
+        <S.SidebarPersonalName>
+          {isLoading ? '' : token}
+        </S.SidebarPersonalName>
         <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
           <Link to="/login">
             <svg alt="logout">

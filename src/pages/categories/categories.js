@@ -11,14 +11,17 @@
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line arrow-body-style, import/no-unresolved
 import { useParams } from "react-router-dom";
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useContext } from "react";
 import { CATEGORIES } from '../../components/sidebar/categories';
+import { userContext } from "../../context/userContext";
 import * as S from './styles';
 
-export const Categories = () => {
+export const Categories = ({ setToken }) => {
     const params = useParams();
+    const token = useContext(userContext);
 
-    // if (localStorage.getItem('token', 'token')) {
+    if (localStorage.getItem('token', token)) {
         const category = CATEGORIES.find((category) => category.id === Number(params.id));;
 
         return (
@@ -26,13 +29,13 @@ export const Categories = () => {
                 <h1>Подборка № {category.id}</h1>
             </S.Categories>
         )
-    // } else {
-    //     const navigate = useNavigate();
-    //     useEffect(() => {
-    //       setToken(false);
-    //       navigate('/login', { replace: true })
-    //     }, [])
-    // }
+    } else {
+        const navigate = useNavigate();
+        useEffect(() => {
+            setToken(false);
+            navigate('/login', { replace: true })
+        }, [])
+     }
     }
 
    

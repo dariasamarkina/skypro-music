@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable import/no-unresolved */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-duplicates */
@@ -8,6 +9,7 @@ import { useState, useEffect } from 'react';
 import GlobalStyle from './styles';
 import * as S from './styles';
 import { AppRoutes } from "./routes";
+import { userContext } from './context/userContext';
 
 function App() {
   const initialToken = localStorage.getItem('token', '');
@@ -22,10 +24,12 @@ function App() {
   }, [])
 
   return (
-    <S.Wrapper>
-      <GlobalStyle />
-      <AppRoutes token={token} setToken={setToken}/>
-    </S.Wrapper>
+    <userContext.Provider value={[token, setToken]}>
+      <S.Wrapper>
+        <GlobalStyle />
+        <AppRoutes token={token} setToken={setToken}/>
+      </S.Wrapper>
+    </userContext.Provider>
   )
 }
 

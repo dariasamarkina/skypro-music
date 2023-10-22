@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Музыкальный сервис Skypro.Music
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+У этого сервиса будут следующие функции:
+
+Регистрация (Log in)
+Возможность залогиниться и разлогиниться (Sign up, Sign out)
+Витрина с доступными треками
+Встроенный в приложение плеер (прослушивание музыки, постановка на паузу и снятие с нее, перемотка, повтор трека, перемешивание плейлиста)
+Добавление трека в избранное
+Список подборок
+
+
+## ДЗ Context
+
+План: 8ч
+Факт: 5ч
 
 ## Available Scripts
 
