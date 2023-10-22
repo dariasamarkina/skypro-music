@@ -1,11 +1,13 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from './style';
-import { setIsPlayingTrack } from '../../store/actions/creators/script';
+import { playCurrentTrack, setIsPlayingTrack } from '../../store/actions/creators/script';
+import { currentPlayTrack, currentPlaylist } from '../../store/selectors/script';
 
 // eslint-disable-next-line import/prefer-default-export
 export function PlayerControls(
@@ -42,11 +44,38 @@ export function PlayerControls(
         alert('Еще не реализовано');
       }
 
+      const playtrack = useSelector(currentPlayTrack);
+      const playlist = useSelector(currentPlaylist);
+
+      const handleNextTrack = () => {
+        if (playtrack) {
+          const number = playlist.indexOf(playtrack);
+          if (number < playlist.length - 1) {
+            const next = playlist[number + 1];
+            dispatch(playCurrentTrack(next));
+          } else{
+              return;
+          }
+        }
+      }
+
+      const handlePrevTrack = () => {
+        if (playtrack) {
+          const number = playlist.indexOf(playtrack);
+          if (number > 0) {
+            const prev = playlist[number - 1];
+            dispatch(playCurrentTrack(prev));
+          } else{
+              return;
+          }
+        }
+      }
+
   return (
     <S.PlayerControls>
 
       <S.PlayerButtonPrev>
-        <S.PlayerButtonPrevSvg alt="prev" onClick={notify}>
+        <S.PlayerButtonPrevSvg alt="prev" onClick={handlePrevTrack}>
           <use xlinkHref="img/icon/sprite.svg#icon-prev" />
         </S.PlayerButtonPrevSvg>
       </S.PlayerButtonPrev>
@@ -70,7 +99,7 @@ export function PlayerControls(
         </S.PlayerButtonPlaySvg>
       </S.PlayerButtonPlay>
 
-      <S.PlayerButtonPlayNext onClick={notify}>
+      <S.PlayerButtonPlayNext onClick={handleNextTrack}>
         <S.PlayerButtonPlayNextSvg alt="next">
           <use xlinkHref="img/icon/sprite.svg#icon-next" />
         </S.PlayerButtonPlayNextSvg>
