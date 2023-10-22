@@ -38,6 +38,7 @@ export const TrackTitle = styled.div`
 `
 
 export const TrackTitleImage = styled.div`
+  position: relative;
   width: 51px;
   height: 51px;
   padding: 16px;
