@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-const */
@@ -10,13 +11,14 @@ import { Player } from '../player/player';
 import { PlayerControls } from '../playercontrols/playercontrols';
 import * as S from './styles';
 import ProgressBar from '../progressbar/progressbar';
-import { currentPlayTrack, currentIsPlaying } from '../../store/selectors/script';
-import { setIsPlayingTrack } from '../../store/actions/creators/script';
+import { currentPlayTrack, currentIsPlaying, currentPlaylist } from '../../store/selectors/script';
+import { setIsPlayingTrack, playCurrentTrack } from '../../store/actions/creators/script';
 
 export function Bar({ isLoading }) {
 
   const PlayTrack = useSelector(currentPlayTrack);
   const isPlaying = useSelector(currentIsPlaying);
+  const playlist = useSelector(currentPlaylist);
   const dispatch = useDispatch(setIsPlayingTrack);
 
   const [isLoop, setIsLoop] = useState(false);
@@ -24,7 +26,13 @@ export function Bar({ isLoading }) {
   const [duration, setDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentVolume, setCurrentVolume] = useState(1);
+  const [shuffle, setShuffle] = useState(false);
   const audioRef = useRef(null);
+
+  const shuffleTracks = () => {
+    const number = Math.floor(Math.random() * (playlist.length - 1));
+    return number;
+  }
 
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value;
@@ -59,9 +67,24 @@ export function Bar({ isLoading }) {
 
   useEffect(handleStart, [PlayTrack]);
 
+  const handleNextTrack = () => {
+    if (PlayTrack) {
+      const number = playlist.indexOf(PlayTrack);
+
+      if (number < playlist.length - 1 && !shuffle) {
+        const next = playlist[number + 1];
+        dispatch(playCurrentTrack(next));
+      } 
+      else if (shuffle) {
+        const next = playlist[shuffleTracks()];
+        dispatch(playCurrentTrack(next));
+      }
+    }
+  }
+
   const endTrack = () => {
     if (!isLoop) {
-      dispatch(setIsPlayingTrack(false));
+      handleNextTrack();
     }
   }
 
@@ -100,6 +123,9 @@ export function Bar({ isLoading }) {
                   isLoop={isLoop}
                   setIsLoop={setIsLoop}
                   handleStart={handleStart}
+                  shuffleTracks={shuffleTracks}
+                  shuffle={shuffle}
+                  setShuffle={setShuffle}
               />
 
               <Player isLoading={isLoading} PlayTrack={PlayTrack}/>
