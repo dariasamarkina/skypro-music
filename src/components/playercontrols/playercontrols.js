@@ -1,21 +1,25 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as S from './style';
+import { setIsPlayingTrack } from '../../store/actions/creators/script';
 
 // eslint-disable-next-line import/prefer-default-export
 export function PlayerControls(
   { isPlaying,
-    setIsPlaying,
     audioRef,
     isLoop,
     setIsLoop,
     handleStart}) {
 
+      const dispatch = useDispatch();
+
       const handleStop = () => {
-        audioRef.current.pause()
-        setIsPlaying(false)
+        audioRef.current.pause();
+        dispatch(setIsPlayingTrack(false));
       }
     
       const togglePlay = isPlaying ? handleStop : handleStart
@@ -34,7 +38,7 @@ export function PlayerControls(
     
       const notify = () => {
         audioRef.current.pause();
-        setIsPlaying(false);;
+        dispatch(setIsPlayingTrack(false));
         alert('Еще не реализовано');
       }
 

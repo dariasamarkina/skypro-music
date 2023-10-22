@@ -57,7 +57,7 @@ export const Mainpage = ({ setToken }) => {
                     getTracks={getTracks} 
                     setPlayTrack={setPlayTrack}/>
                 
-                {PlayTrack ? <Bar isLoading={isLoading} PlayTrack={PlayTrack} /> : null}
+                {PlayTrack ? <Bar isLoading={isLoading}/> : null}
             </S.Container>
         )
     }

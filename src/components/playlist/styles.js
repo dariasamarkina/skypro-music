@@ -35,3 +35,4 @@ export const ContentPlaylist = styled.div`
     border-radius: 10px;
     background-color: #4b4949;
 `
+

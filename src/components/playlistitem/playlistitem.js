@@ -1,11 +1,22 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from './styles';
+import { playCurrentTrack } from '../../store/actions/creators/script';
+import { currentIsPlaying, currentPlayTrack } from '../../store/selectors/script';
 
 export function PlaylistItem({ getTracks, setPlayTrack }) {
+
+  const dispatch = useDispatch();
+
+  const isPlaying = useSelector(currentIsPlaying);
+  const currentTrack = useSelector(currentPlayTrack);
+
   const startPlayer = (track) => {
+    dispatch(playCurrentTrack(track));
     setPlayTrack(track)
   }
 
@@ -27,6 +38,9 @@ export function PlaylistItem({ getTracks, setPlayTrack }) {
           <S.PlaylistTrack onClick={() => startPlayer(track)}>
             <S.TrackTitle>
               <S.TrackTitleImage>
+                {currentTrack.id === track.id  && (
+                  <S.CurrentTrackAnimation $isPlaying = {isPlaying} />
+                )}
                 <S.TrackTitleSvg alt="music">
                   <use xlinkHref="img/icon/sprite.svg#icon-note" />
                 </S.TrackTitleSvg>

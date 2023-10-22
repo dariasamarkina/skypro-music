@@ -1,17 +1,24 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable prefer-const */
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
 import React, { useRef, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Player } from '../player/player';
 import { PlayerControls } from '../playercontrols/playercontrols';
 import * as S from './styles';
 import ProgressBar from '../progressbar/progressbar';
+import { currentPlayTrack, currentIsPlaying } from '../../store/selectors/script';
+import { setIsPlayingTrack } from '../../store/actions/creators/script';
 
-export function Bar({ isLoading, PlayTrack }) {
+export function Bar({ isLoading }) {
 
-  const [isPlaying, setIsPlaying] = useState(false);
+  const PlayTrack = useSelector(currentPlayTrack);
+  const isPlaying = useSelector(currentIsPlaying);
+  const dispatch = useDispatch(setIsPlayingTrack);
+
   const [isLoop, setIsLoop] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -47,14 +54,14 @@ export function Bar({ isLoading, PlayTrack }) {
 
   const handleStart = () => {
     audioRef.current.play();
-    setIsPlaying(true);
+    dispatch(setIsPlayingTrack(true));
   }
 
   useEffect(handleStart, [PlayTrack]);
 
   const endTrack = () => {
     if (!isLoop) {
-      setIsPlaying(false)
+      dispatch(setIsPlayingTrack(false));
     }
   }
 
@@ -88,7 +95,6 @@ export function Bar({ isLoading, PlayTrack }) {
             <PlayerControls
                 isLoading={isLoading}
                 isPlaying={isPlaying}
-                setIsPlaying={setIsPlaying}
                 audioRef={audioRef}
                 isLoop={isLoop}
                 setIsLoop={setIsLoop}
