@@ -53,7 +53,7 @@ export function Bar({ isLoading }) {
   }
 
   const handleStart = () => {
-    audioRef.current.play();
+    audioRef.current?.play();
     dispatch(setIsPlayingTrack(true));
   }
 
@@ -66,67 +66,69 @@ export function Bar({ isLoading }) {
   }
 
   return (
-    <S.Bar>
-       <S.ProgressTimer>
-        <S.TimerValues>{currentTime}</S.TimerValues>
-        <S.TimerValues>{`/${duration}`}</S.TimerValues>
-      </S.ProgressTimer>
+    PlayTrack.id && (
+      <S.Bar>
+        <S.ProgressTimer>
+          <S.TimerValues>{currentTime}</S.TimerValues>
+          <S.TimerValues>{`/${duration}`}</S.TimerValues>
+        </S.ProgressTimer>
 
-      <audio
-        controls
-        src={PlayTrack.track_file}
-        ref={audioRef}
-        style={{ display: 'none' }}
-        onTimeUpdate={handleAudioUpdate}
-        onEnded={endTrack}>
-          <source src={PlayTrack.track_file} type="audio/mpeg" />
-      </audio>
+        <audio
+          controls
+          src={PlayTrack.track_file}
+          ref={audioRef}
+          style={{ display: 'none' }}
+          onTimeUpdate={handleAudioUpdate}
+          onEnded={endTrack}>
+            <source src={PlayTrack.track_file} type="audio/mpeg" />
+        </audio>
 
-      <S.BarContent>
-        <ProgressBar
-            audioRef={audioRef}
-            currentTime={currentTime}
-            setCurrentTime={setCurrentTime}
-            setAudioProgress={setAudioProgress}
-            audioProgress={audioProgress}
-          />
-        <S.BarPlayerBlock>
-          <S.BarPlayer>
-            <PlayerControls
-                isLoading={isLoading}
-                isPlaying={isPlaying}
-                audioRef={audioRef}
-                isLoop={isLoop}
-                setIsLoop={setIsLoop}
-                handleStart={handleStart}
+        <S.BarContent>
+          <ProgressBar
+              audioRef={audioRef}
+              currentTime={currentTime}
+              setCurrentTime={setCurrentTime}
+              setAudioProgress={setAudioProgress}
+              audioProgress={audioProgress}
             />
+          <S.BarPlayerBlock>
+            <S.BarPlayer>
+              <PlayerControls
+                  isLoading={isLoading}
+                  isPlaying={isPlaying}
+                  audioRef={audioRef}
+                  isLoop={isLoop}
+                  setIsLoop={setIsLoop}
+                  handleStart={handleStart}
+              />
 
-            <Player isLoading={isLoading} PlayTrack={PlayTrack}/>
-          </S.BarPlayer>
+              <Player isLoading={isLoading} PlayTrack={PlayTrack}/>
+            </S.BarPlayer>
 
-          <S.BarVolumeBlock className="volume">
-            <S.VolumeContent>
-              <S.VolumeImage>
-                <S.VolumeSvg alt="volume">
-                  <use xlinkHref="img/icon/sprite.svg#icon-volume" />
-                </S.VolumeSvg>
-              </S.VolumeImage>
+            <S.BarVolumeBlock className="volume">
+              <S.VolumeContent>
+                <S.VolumeImage>
+                  <S.VolumeSvg alt="volume">
+                    <use xlinkHref="img/icon/sprite.svg#icon-volume" />
+                  </S.VolumeSvg>
+                </S.VolumeImage>
 
-              <S.VolumeProgress className="_btn">
-                <S.VolumeProgressLine
-                  className="_btn"
-                  type="range"
-                  name="range"
-                  min={0}
-                  max={1}
-                  value={currentVolume}
-                  step={0.1}
-                  onChange={handleVolume}/>
-              </S.VolumeProgress>
-            </S.VolumeContent>
-          </S.BarVolumeBlock>
-        </S.BarPlayerBlock>
-      </S.BarContent>
-    </S.Bar>
+                <S.VolumeProgress className="_btn">
+                  <S.VolumeProgressLine
+                    className="_btn"
+                    type="range"
+                    name="range"
+                    min={0}
+                    max={1}
+                    value={currentVolume}
+                    step={0.1}
+                    onChange={handleVolume}/>
+                </S.VolumeProgress>
+              </S.VolumeContent>
+            </S.BarVolumeBlock>
+          </S.BarPlayerBlock>
+        </S.BarContent>
+      </S.Bar>
+    )
   )
 }

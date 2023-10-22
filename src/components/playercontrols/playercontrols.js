@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-alert */
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as S from './style';
 import { setIsPlayingTrack } from '../../store/actions/creators/script';

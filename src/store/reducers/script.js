@@ -1,5 +1,5 @@
 /* eslint-disable default-param-last */
-import { SET_CURRENT_TRACK, SET_IS_PLAYING } from "../actions/types/script";
+import { SET_CURRENT_PLAYLIST, SET_CURRENT_TRACK, SET_IS_PLAYING } from "../actions/types/script";
 
 const initialState = {
     track: {},
@@ -20,6 +20,13 @@ export default function currentTrackReducer (state = initialState, action) {
             return {
                 ...state,
                 isPlaying: action.payload,
+            }
+        }
+
+        case SET_CURRENT_PLAYLIST: {
+            return {
+                ...state,
+                playlist: action.payload,
             }
         }
 
