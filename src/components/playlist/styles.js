@@ -7,7 +7,7 @@ export const ContentPlaylistItems = styled.div`
 export const ContentPlaylist = styled.div`
   height: 673px;
   width: 1084px;
-  padding-right: 8px;
+  padding-right: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,3 +35,4 @@ export const ContentPlaylist = styled.div`
     border-radius: 10px;
     background-color: #4b4949;
 `
+

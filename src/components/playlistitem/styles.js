@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { styled } from 'styled-components';
+import styled, { css } from "styled-components";
 
 export const PlaylistItem = styled.div`
   width: 100%;
@@ -38,6 +38,7 @@ export const TrackTitle = styled.div`
 `
 
 export const TrackTitleImage = styled.div`
+  position: relative;
   width: 51px;
   height: 51px;
   padding: 16px;
@@ -53,6 +54,33 @@ export const TrackTitleImage = styled.div`
   justify-content: center;
   margin-right: 17px;
 `
+
+const animationActive = css`
+  @keyframes active {
+    0%,
+    to {
+      transform: scale(0.5);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+  animation: active 0.6s ease-in-out infinite both;
+  `
+
+  export const CurrentTrackAnimation = styled.div`
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: #b672ff;
+  border-radius: 8px;
+  display: block;
+  ${(props) =>
+    props.$isPlaying &&
+    css`
+      ${animationActive}
+    `}
+  ` 
 
 export const TrackTitleSvg = styled.svg`
   width: 18px;

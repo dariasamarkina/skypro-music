@@ -1,12 +1,26 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as S from './styles';
+import { playCurrentTrack } from '../../store/actions/creators/script';
+import { currentIsPlaying, currentPlayTrack, currentPlaylist } from '../../store/selectors/script';
 
-export function PlaylistItem({ getTracks, setPlayTrack }) {
+export function PlaylistItem () {
+
+  const dispatch = useDispatch();
+
+  const isPlaying = useSelector(currentIsPlaying);
+  const currentTrack = useSelector(currentPlayTrack);
+
+  const playlist = useSelector(currentPlaylist);
+
   const startPlayer = (track) => {
-    setPlayTrack(track)
+    dispatch(playCurrentTrack(track));
   }
 
   function convertTime(time) {
@@ -20,20 +34,21 @@ export function PlaylistItem({ getTracks, setPlayTrack }) {
   }
 
   return (
-    <>
-      {getTracks?.map((track) => (
-        
+      <div>
+        {playlist?.map((track) => (
         <S.PlaylistItem key={track.id}>
           <S.PlaylistTrack onClick={() => startPlayer(track)}>
             <S.TrackTitle>
               <S.TrackTitleImage>
+                {currentTrack.id === track.id  && (
+                  <S.CurrentTrackAnimation $isPlaying = {isPlaying} />
+                )}
                 <S.TrackTitleSvg alt="music">
                   <use xlinkHref="img/icon/sprite.svg#icon-note" />
                 </S.TrackTitleSvg>
               </S.TrackTitleImage>
               <S.TrackTitleText>
                 <S.TrackTitleLink>
-                {/* href={track.track_file} */}
                   {track.name}
                   <S.TrackTitleSpan />
                 </S.TrackTitleLink>
@@ -60,6 +75,6 @@ export function PlaylistItem({ getTracks, setPlayTrack }) {
           </S.PlaylistTrack>
         </S.PlaylistItem>
       ))}
-    </>
+    </div>
   )
 }
