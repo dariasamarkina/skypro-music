@@ -8,10 +8,13 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { CATEGORIES } from './categories';
 import * as S from './styles';
 import { SkeletonSidebarList } from '../skeleton/skeleton';
 import { userContext } from '../../context/userContext';
+import { selectIsPlaying, currentTrackSelector, selectIsLoading } from '../../store/selectors/script';
+import { useGetAllTracksQuery } from '../../services/playlists';
 
 const CategoriesList = ({ categories }) => {
   return (
@@ -36,24 +39,30 @@ function SidebarListLoaded() {
   return <CategoriesList categories={CATEGORIES} />
 }
 
-export function Sidebar({ isLoading }) {
+export function Sidebar() {
 
-  const [token, setToken] = useContext(userContext);
-  console.log(token);
-
+  const { setToken } = useContext(userContext);
+  const isLoading = useSelector(selectIsLoading);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isFetching } = useGetAllTracksQuery();
 
   const handleLogOut = () => {
     localStorage.clear();
     setToken(false);
+    dispatch(currentTrackSelector({}));
+    dispatch(selectIsPlaying(false));
     navigate('/login');
   }
+
+  const userData = JSON.parse(localStorage.getItem('token'));
+  const userName = userData.username;
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
         <S.SidebarPersonalName>
-          {isLoading ? '' : token}
+          {isLoading ? '' : userName}
         </S.SidebarPersonalName>
         <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
           <Link to="/login">
@@ -64,7 +73,7 @@ export function Sidebar({ isLoading }) {
         </S.SidebarIcon>
       </S.SidebarPersonal>
       <S.SidebarBlock>
-        {isLoading ? <SkeletonSidebarList/> : <SidebarListLoaded/>}
+      {isLoading && isFetching ? <SkeletonSidebarList /> : <SidebarListLoaded />}
       </S.SidebarBlock>
     </S.MainSidebar>
   )

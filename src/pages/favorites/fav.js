@@ -9,26 +9,45 @@
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line arrow-body-style, import/no-unresolved
 
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import { userContext } from '../../context/userContext';
+import { ContentTitle } from '../../components/playlistheader/styles';
+import { Playlist } from '../../components/playlist/playlist';
 import * as S from './styles';
+import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist } from '../../store/slices/trackslice';
+import { useGetFavouriteTracksQuery } from '../../services/playlists';
 
-export const Favorites = ({ setToken }) => {
-    const token = useContext(userContext);
+export const Favorites = ({ isLoading }) => {
+    const { token, setToken } = useContext(userContext);
+    const dispatch = useDispatch();
+
+    const { data, error } = useGetFavouriteTracksQuery();
+    useEffect(() => {
+        dispatch(setCurrentPlaylist(data));
+        dispatch(setIsLoading(false));
+      }, [data]);
+
     if (localStorage.getItem('token', token)) {
         return (
-            <S.Favorites>
-                <h1>Мой плейлист</h1>
-                <h2>Избранные треки</h2>
-            </S.Favorites>
+            <div>
+                <S.CenterblockH2>Мои Треки</S.CenterblockH2>
+                <S.CenterblockContent>
+                <ContentTitle isLoading={isLoading} />
+                {error ? (
+                    <p>Не удалось заргузить плейлист: {error.error}</p>
+                ) : (
+                    <Playlist tracks={data} />
+                )}
+                </S.CenterblockContent>
+          </div>
         ) 
     } else {
-        const navigate = useNavigate();
         useEffect(() => {
             setToken(false);
-            navigate('/login', { replace: true })
-        }, [])
+            dispatch(setCurrentTrack({}));
+            dispatch(setIsPlaying(false));
+          }, []);
     }
 }
     

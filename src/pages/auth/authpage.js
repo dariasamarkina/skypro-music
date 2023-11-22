@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-return */
 /* eslint-disable no-else-return */
 /* eslint-disable import/prefer-default-export */
@@ -5,21 +6,23 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-alert */
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import * as S from "./styles";
-import { registerUser, loginUser } from "../../api";
+import { registerUser, loginUser,getAccessToken } from "../../api";
+import { userContext } from "../../context/userContext";
 
-export function AuthPage({ isLoginMode = false, setToken }) {
+export function AuthPage({ isLoginMode = false }) {
   const [error, setError] = useState(null);
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [username, setUsername] = useState('');
+  const [isAuthProcess, setIsAuthProcess] = useState(false);
 
   const [btnBlocked, setBtnBlocked] = useState(false);
 
   const navigate = useNavigate();
+  const { token, setToken } = useContext(userContext);
 
   const handleLogin = async ({ email, password }) => {
 
@@ -32,12 +35,12 @@ export function AuthPage({ isLoginMode = false, setToken }) {
     } 
     else {
       try {
+        setIsAuthProcess(true);
         setBtnBlocked(true);
-        
         const userData = await loginUser({ email, password });
-        localStorage.setItem('token', JSON.stringify(userData.username));
-
-        setToken(userData.username);
+        userData.token = await getAccessToken({ email, password });
+        localStorage.setItem('token', JSON.stringify(userData))
+        setToken(userData);
         navigate('/');
         } 
         catch (error) {

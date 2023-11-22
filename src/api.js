@@ -26,8 +26,6 @@ export async function registerUser({ email, password, username }) {
         },
     })
 
-    console.log(response);
-
     if(response.ok) {
         return response.json()
     // eslint-disable-next-line no-else-return
@@ -50,8 +48,6 @@ export async function loginUser({ email, password }) {
         },
     })
 
-    console.log(response);
-
     if(response.ok) {
         return response.json()
     } else if (response.status === 400) {
@@ -62,3 +58,42 @@ export async function loginUser({ email, password }) {
         throw new Error ('Неверный e-mail или пароль')
     }
 }
+
+export async function getAccessToken({ email, password }) {
+    const response = await fetch( //
+      'https://skypro-music-api.skyeng.tech/user/token/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    )
+  
+    if (response.ok) {
+      return response.json()
+    } else {
+      throw new Error('Error')
+    }
+  }
+  
+  export async function refreshToken({ token }) {
+    const response = await fetch( //
+      'https://skypro-music-api.skyeng.tech/user/token/refresh/',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          refresh: token,
+        }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      },
+    )
+  
+    return response.json()
+  }

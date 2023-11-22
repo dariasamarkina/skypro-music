@@ -6,8 +6,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { useContext } from 'react';
+import { useDispatch } from 'react-redux';
 import * as S from './styles';
 import { userContext } from '../../context/userContext';
+// import { selectIsPlaying, currentPlaylistSelector } from '../../store/selectors/script';
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackslice';
+
 
 // eslint-disable-next-line import/prefer-default-export
 export function Navigation({ setToken }) {
@@ -16,9 +20,13 @@ export function Navigation({ setToken }) {
 
   const token = useContext(userContext);
 
+  const dispatch = useDispatch();
+
   const handleLogOut = () => {
-    localStorage.removeItem('token', token)
-    setToken(false)
+    localStorage.removeItem('token', token);
+    setToken(false);
+    dispatch(setCurrentTrack({}));
+    dispatch(setIsPlaying(false));
   }
 
   return (

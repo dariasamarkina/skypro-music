@@ -6,48 +6,24 @@
 /* eslint-disable react/function-component-definition */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable arrow-body-style */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import { userContext } from '../../context/userContext';
 import * as S from './styles';
 import { Main } from "../../components/main/main";
 import { Bar } from '../../components/bar/bar';
 import { getAllTracks } from '../../api';
 import { ErrorNotification } from '../../components/error/error';
-import { currentPlayTrack } from '../../store/selectors/script';
-import { setCurrentPlaylist } from '../../store/actions/creators/script';
+import { setAllTracks, setIsLoading } from '../../store/slices/trackslice';
+import { selectIsLoading, currentTrackSelector } from '../../store/selectors/script';
 
-export const Mainpage = ({ setToken }) => {
-
-    const [isLoading, setIsLoading] = useState(true);
+export const Mainpage = () => {
+    const isLoading = useSelector(selectIsLoading);
     const [getTracksError, setgetTracksError] = useState(null);
-
     const dispatch = useDispatch();
-
-    const PlayTrack = useSelector(currentPlayTrack);
-
-        useEffect(() => {
-            setIsLoading(true);
-            
-            // eslint-disable-next-line no-console
-            getAllTracks().then((playlist) => {
-                dispatch(setCurrentPlaylist(playlist));
-                setIsLoading(false);
-                setgetTracksError(null);
-            })
-            .catch ((error) => {
-                console.log(error.message);
-                setgetTracksError(error.message);
-                setIsLoading(false);
-            })
-          }, [])
-        
-     
-    useEffect(() => {
-        const changeState = () => setIsLoading(!isLoading)
-        const timer =setTimeout(changeState, 5000)
-    
-        return () => clearTimeout(timer)
-      }, [])
+    const PlayTrack = useSelector(currentTrackSelector);
+    const { token, setToken } = useContext(userContext);
 
       if (getTracksError) {
         return (
