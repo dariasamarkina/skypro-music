@@ -10,5 +10,5 @@ export const store = configureStore({
        [playlistApi.reducerPath]: playlistApi.reducer,
     },
 
-    middleware: ( (getDefaultMiddleware) => getDefaultMiddleware().concat(playlistApi.middleware)),
+    middleware:  (getDefaultMiddleware) => getDefaultMiddleware().concat(playlistApi.middleware),
 })

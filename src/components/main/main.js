@@ -2,10 +2,11 @@
 /* eslint-disable no-else-return */
 /* eslint-disable no-undef */
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import * as S from './styles';
 import { Navigation } from '../navmenu/nav';
 import { Filter } from '../filter/filter';
-import { PlaylistHeader } from '../playlistheader/playlistheader';
+import { ContentTitlePlaylist } from '../playlisttitle/playlisttitle';
 import { Playlist } from "../playlist/playlist";
 import { Sidebar } from "../sidebar/sidebar";
 import { useGetAllTracksQuery } from '../../services/playlists';
@@ -41,7 +42,7 @@ export function Main({ isLoading, setToken }) {
           <S.CenterblockH2>Треки</S.CenterblockH2>
           <Filter isLoading={isLoading}/>
           <S.CenterblockContent>
-            <PlaylistHeader isLoading={isLoading}/>
+            <ContentTitlePlaylist isLoading={isLoading}/>
             <Playlist 
               isLoading={isLoading} isFetching={isFetching}/>
           </S.CenterblockContent>

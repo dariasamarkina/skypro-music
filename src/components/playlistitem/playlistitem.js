@@ -11,7 +11,7 @@ import * as S from './styles';
 import { userContext } from '../../context/userContext';
 import { selectIsPlaying, currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/script';
 import { setActivePlaylist, setCurrentPlaylist, setCurrentTrack, setIsLoading } from '../../store/slices/trackslice';
-import { useAddFavouriteTracksMutation, useDeleteFavouriteTracksMutation, useGetAllTracksQuery, useGetFavouriteTracksQuery } from '../../services/playlists';
+import { useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation, useGetAllTracksQuery, useGetFavoriteTracksQuery } from '../../services/playlists';
 
 export function PlaylistItem ({ track, album, author, link, title, albumLink, authorLink, titleSpan, time }) {
 
@@ -28,13 +28,13 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
   }
 
   const [isLiked, setIsLiked] = useState(false);
-  const [addFavouriteTrack] = useAddFavouriteTracksMutation();
-  const [deleteFavouriteTrack] = useDeleteFavouriteTracksMutation();
+  const [addFavoriteTrack] = useAddFavoriteTracksMutation();
+  const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
   const navigate = useNavigate();
   const { token, setToken } = useContext(userContext);
 
   const addLike = async (id) => {
-    await addFavouriteTrack(id).unwrap().catch((error) => {
+    await addFavoriteTrack(id).unwrap().catch((error) => {
       localStorage.removeItem('token');
       setToken(false);
       navigate('/login');
@@ -43,7 +43,7 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
   }
 
   const deleteLike = async (id) => {
-    deleteFavouriteTrack(id).unwrap().catch((error) => {
+    deleteFavoriteTrack(id).unwrap().catch((error) => {
       localStorage.removeItem('token');
       setToken(false);
       navigate('/login');

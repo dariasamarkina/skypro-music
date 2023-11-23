@@ -24,7 +24,7 @@ function App() {
   }, [])
 
   return (
-    <userContext.Provider value={[token, setToken]}>
+    <userContext.Provider value={{token, setToken}}>
       <S.Wrapper>
         <GlobalStyle />
         <AppRoutes token={token} setToken={setToken}/>

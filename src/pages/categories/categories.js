@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { CATEGORIES } from '../../components/sidebar/categories';
 import { userContext } from "../../context/userContext";
 import * as S from './styles';
-import { ContentTitle } from "../../components/playlistheader/styles";
+import { ContentTitlePlaylist } from "../../components/playlisttitle/playlisttitle";
 import { Playlist } from "../../components/playlist/playlist";
 import { selectIsPlaying } from "../../store/selectors/script";
 
@@ -32,7 +32,7 @@ export const Categories = ({ isLoading }) => {
                 <div>
                     <S.CenterblockH2>Category Page: {category.id}</S.CenterblockH2>
                     <S.CenterblockContent>
-                        <ContentTitle isLoading={isLoading} />
+                        <ContentTitlePlaylist isLoading={isLoading} />
                         <Playlist isLoading={isLoading} />
                     </S.CenterblockContent>
                 </div>

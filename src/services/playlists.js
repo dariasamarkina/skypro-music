@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const accessToken = () => {
   const accessToken = JSON.parse(localStorage.getItem('token'));
@@ -69,4 +69,4 @@ export const playlistApi = createApi({
     })
 })
 
-export const { useGetFavouriteTracksQuery, useGetAllTracksQuery, useAddFavouriteTracksMutation, useDeleteFavouriteTracksMutation } = playlistApi;
+export const { useGetFavoriteTracksQuery, useGetAllTracksQuery, useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation } = playlistApi;

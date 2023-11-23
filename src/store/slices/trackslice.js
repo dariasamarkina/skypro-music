@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const trackSLice = createSlice({
-    name: "Track",
+    name: 'Track',
     initialState,
     reducers: {
 

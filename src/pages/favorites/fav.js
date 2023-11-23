@@ -12,17 +12,17 @@
 import { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { userContext } from '../../context/userContext';
-import { ContentTitle } from '../../components/playlistheader/styles';
+import { ContentTitlePlaylist } from '../../components/playlisttitle/playlisttitle'; 
 import { Playlist } from '../../components/playlist/playlist';
 import * as S from './styles';
 import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist } from '../../store/slices/trackslice';
-import { useGetFavouriteTracksQuery } from '../../services/playlists';
+import { useGetFavoriteTracksQuery } from '../../services/playlists';
 
 export const Favorites = ({ isLoading }) => {
     const { token, setToken } = useContext(userContext);
     const dispatch = useDispatch();
 
-    const { data, error } = useGetFavouriteTracksQuery();
+    const { data, error } = useGetFavoriteTracksQuery();
     useEffect(() => {
         dispatch(setCurrentPlaylist(data));
         dispatch(setIsLoading(false));
@@ -33,7 +33,7 @@ export const Favorites = ({ isLoading }) => {
             <div>
                 <S.CenterblockH2>Мои Треки</S.CenterblockH2>
                 <S.CenterblockContent>
-                <ContentTitle isLoading={isLoading} />
+                <ContentTitlePlaylist isLoading={isLoading} />
                 {error ? (
                     <p>Не удалось заргузить плейлист: {error.error}</p>
                 ) : (
