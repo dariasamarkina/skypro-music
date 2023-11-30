@@ -50,7 +50,7 @@ export function Sidebar() {
   const handleLogOut = () => {
     localStorage.clear();
     setToken(false);
-    dispatch(currentTrackSelector({}));
+    dispatch(currentTrackSelector(null));
     dispatch(selectIsPlaying(false));
     navigate('/login');
   }
