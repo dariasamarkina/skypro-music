@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     allTracks: [],
-    currentTrack: {},
+    currentTrack: null,
     currentPlaylist: {},
     activePlaylist: {},
     isPlaying: false,

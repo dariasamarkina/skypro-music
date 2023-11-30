@@ -86,9 +86,9 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
         <S.PlaylistTrack onClick={() => startPlayer(track)}>
           <S.TrackTitle>
             <S.TrackTitleImage>
-              {currentTrack.id === track.id  && (
+              {currentTrack && (currentTrack.id === track.id  && (
                 <S.CurrentTrackAnimation $isPlaying = {isPlaying} />
-              )}
+              ))}
               <S.TrackTitleSvg alt="music">
                 <use xlinkHref="img/icon/sprite.svg#icon-note" />
               </S.TrackTitleSvg>

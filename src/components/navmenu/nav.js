@@ -25,7 +25,7 @@ export function Navigation({ setToken }) {
   const handleLogOut = () => {
     localStorage.removeItem('token', token);
     setToken(false);
-    dispatch(setCurrentTrack({}));
+    dispatch(setCurrentTrack(null));
     dispatch(setIsPlaying(false));
   }
 
