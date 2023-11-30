@@ -10,7 +10,7 @@ import { ContentTitlePlaylist } from '../playlisttitle/playlisttitle';
 import { Playlist } from "../playlist/playlist";
 import { Sidebar } from "../sidebar/sidebar";
 import { useGetAllTracksQuery } from '../../services/playlists';
-import { setCurrentPlaylist, setIsLoading, setIsPlaying } from '../../store/slices/trackslice';
+import { setCurrentPlaylist, setIsLoading } from '../../store/slices/trackslice';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Main({ isLoading, setToken }) {
@@ -24,7 +24,6 @@ export function Main({ isLoading, setToken }) {
     dispatch(setIsLoading(false))
   }, [data])
 
-  if (localStorage.getItem('token', 'token')) {
     return (
       <S.Main>
         <Navigation setToken={setToken}/>
@@ -44,18 +43,10 @@ export function Main({ isLoading, setToken }) {
           <S.CenterblockContent>
             <ContentTitlePlaylist isLoading={isLoading}/>
             <Playlist 
-              isLoading={isLoading} isFetching={isFetching}/>
+              isLoading={isLoading} isFetching={isFetching} tracks={data}/>
           </S.CenterblockContent>
         </S.MainCenterblock>
         <Sidebar isLoading={isLoading} setToken={setToken} isFetching={isFetching}/>
       </S.Main>
     )
-  } else {
-      useEffect(() => {
-        setToken(false);
-        dispatch(setCurrentTrack({}));
-        dispatch(setIsPlaying(false));
-      }, [])
-  }
-
 }
