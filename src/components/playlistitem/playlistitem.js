@@ -35,9 +35,10 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
 
   const addLike = async (id) => {
     await addFavoriteTrack(id).unwrap().catch((error) => {
-      localStorage.removeItem('token');
-      setToken(false);
-      navigate('/login');
+      // localStorage.removeItem('token');
+      // setToken(false);
+      // navigate('/login');
+      console.log(error)
     })
     setIsLiked(true);
   }

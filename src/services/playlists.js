@@ -5,6 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const accessToken = () => {
   const accessToken = JSON.parse(localStorage.getItem('token'));
+  console.log(accessToken.token.access);
 
   if(!accessToken) {
     return;
@@ -12,6 +13,22 @@ const accessToken = () => {
 
   return accessToken.token.access;
 };
+
+// const refreshToken = () => {
+//   fetch("https://skypro-music-api.skyeng.tech/user/token/refresh/", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     refresh: accessToken(),
+//   }),
+//   headers: {
+//     "content-type": "application/json",
+//   },
+// })
+//   .then((response) => response.json())
+//   .then((json) => console.log(json));
+// }
+
+// refreshToken();
 
 const DATA_TAG = { type: 'Tracks', id: 'LIST'};
 
