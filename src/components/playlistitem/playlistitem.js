@@ -34,28 +34,21 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
   const { token, setToken } = useContext(userContext);
 
   const addLike = async (id) => {
-    await addFavoriteTrack(id).unwrap().catch((error) => {
-      // localStorage.removeItem('token');
-      // setToken(false);
-      // navigate('/login');
-      console.log(error)
-    })
+    await addFavoriteTrack(id)
     setIsLiked(true);
   }
 
   const deleteLike = async (id) => {
-    deleteFavoriteTrack(id).unwrap().catch((error) => {
-      localStorage.removeItem('token');
-      setToken(false);
-      navigate('/login');
-    })
+    await deleteFavoriteTrack(id)
     setIsLiked(false);
   }
 
   const toggleLikeDislike = (id) => {
     if (!isLiked) {
+      console.log('like')
       addLike(id);
     } else {
+      console.log('dislike')
       deleteLike(id);
     }
   }
@@ -112,7 +105,9 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
             </S.TrackAlbumLink>
           </S.TrackAlbum>
           <div className="track__time">
-            <S.TrackTimeSvg alt="time" onClick={() => toggleLikeDislike(track.id)}>
+            <S.TrackTimeSvg alt="time" onClick={(e) => {
+              toggleLikeDislike(track.id)
+              e.stopPropagation()}}>
               {isLiked ? (
                 <svg
                 width="16"

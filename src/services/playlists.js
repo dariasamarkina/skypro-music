@@ -5,7 +5,6 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const accessToken = () => {
   const accessToken = JSON.parse(localStorage.getItem('token'));
-  console.log(accessToken.token.access);
 
   if(!accessToken) {
     return;
@@ -66,9 +65,9 @@ export const playlistApi = createApi({
       query: (id) => ({
         url: `catalog/track/${id}/favorite`,
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken()}`,
-        },
+        // headers: {
+        //   Authorization: `Bearer ${accessToken()}`,
+        // },
       }),
       invalidatesTags: [DATA_TAG],
     }),

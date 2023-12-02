@@ -11,16 +11,20 @@
 
 import { useEffect, useContext } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../context/userContext';
 import { ContentTitlePlaylist } from '../../components/playlisttitle/playlisttitle'; 
 import { Playlist } from '../../components/playlist/playlist';
 import * as S from './styles';
 import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist } from '../../store/slices/trackslice';
+import { currentTrackSelector, selectIsPlaying } from '../../store/selectors/script';
 import { useGetFavoriteTracksQuery } from '../../services/playlists';
+import { Navigation } from '../../components/navmenu/nav';
 
 export const Favorites = ({ isLoading }) => {
     const { token, setToken } = useContext(userContext);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { data, error } = useGetFavoriteTracksQuery();
     useEffect(() => {
@@ -28,18 +32,52 @@ export const Favorites = ({ isLoading }) => {
         dispatch(setIsLoading(false));
       }, [data]);
 
+      const handleLogOut = () => {
+        localStorage.clear();
+        setToken(false);
+        dispatch(currentTrackSelector(null));
+        dispatch(selectIsPlaying(false));
+        navigate('/login');
+      }
+
     if (localStorage.getItem('token', token)) {
         return (
             <div>
-                <S.CenterblockH2>Мои Треки</S.CenterblockH2>
-                <S.CenterblockContent>
-                <ContentTitlePlaylist isLoading={isLoading} />
-                {error ? (
-                    <p>Не удалось заргузить плейлист: {error.error}</p>
-                ) : (
-                    <Playlist tracks={data} />
-                )}
-                </S.CenterblockContent>
+                <S.Main>
+                    <Navigation setToken={setToken}/>
+                    <S.MainCenterblock>
+                        <S.HeaderBlock>
+                            <S.CenterblockSearch>
+                                <S.SearchSvg>
+                                <use xlinkHref="img/icon/sprite.svg#icon-search" />
+                                </S.SearchSvg>
+                                <S.SearchText
+                                type="search"
+                                placeholder="Поиск"
+                                name="search"
+                                />
+                            </S.CenterblockSearch>
+
+                            <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
+                                <Link to="/login">
+                                    <svg alt="logout">
+                                    <use xlinkHref="img/icon/sprite.svg#logout" />
+                                    </svg>
+                                </Link>
+                            </S.SidebarIcon>
+                    </S.HeaderBlock>
+
+                        <S.CenterblockH2>Мои Треки</S.CenterblockH2>
+                        <S.CenterblockContent>
+                        <ContentTitlePlaylist isLoading={isLoading} />
+                        {error ? (
+                            <p>Не удалось заргузить плейлист: {error.error}</p>
+                        ) : (
+                            <Playlist tracks={data} />
+                        )}
+                        </S.CenterblockContent>
+                    </S.MainCenterblock>
+            </S.Main>
           </div>
         ) 
     } else {
