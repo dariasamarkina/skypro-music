@@ -17,7 +17,6 @@ import { ContentTitlePlaylist } from '../../components/playlisttitle/playlisttit
 import { Playlist } from '../../components/playlist/playlist';
 import * as S from './styles';
 import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist } from '../../store/slices/trackslice';
-import { currentTrackSelector, selectIsPlaying } from '../../store/selectors/script';
 import { useGetFavoriteTracksQuery } from '../../services/playlists';
 import { Navigation } from '../../components/navmenu/nav';
 
@@ -35,8 +34,8 @@ export const Favorites = ({ isLoading }) => {
       const handleLogOut = () => {
         localStorage.clear();
         setToken(false);
-        dispatch(currentTrackSelector(null));
-        dispatch(selectIsPlaying(false));
+        dispatch(setCurrentTrack(null));
+        dispatch(setIsPlaying(false));
         navigate('/login');
       }
 

@@ -9,7 +9,6 @@ import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import * as S from './styles';
 import { userContext } from '../../context/userContext';
-// import { selectIsPlaying, currentPlaylistSelector } from '../../store/selectors/script';
 import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackslice';
 
 

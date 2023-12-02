@@ -13,8 +13,9 @@ import { CATEGORIES } from './categories';
 import * as S from './styles';
 import { SkeletonSidebarList } from '../skeleton/skeleton';
 import { userContext } from '../../context/userContext';
-import { selectIsPlaying, currentTrackSelector, selectIsLoading } from '../../store/selectors/script';
+import { selectIsLoading } from '../../store/selectors/script';
 import { useGetAllTracksQuery } from '../../services/playlists';
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackslice';
 
 const CategoriesList = ({ categories }) => {
   return (
@@ -50,8 +51,8 @@ export function Sidebar() {
   const handleLogOut = () => {
     localStorage.clear();
     setToken(false);
-    dispatch(currentTrackSelector(null));
-    dispatch(selectIsPlaying(false));
+    dispatch(setCurrentTrack(null));
+    dispatch(setIsPlaying(false));
     navigate('/login');
   }
 
