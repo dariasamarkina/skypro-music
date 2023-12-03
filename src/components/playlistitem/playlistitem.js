@@ -45,10 +45,8 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
 
   const toggleLikeDislike = (id) => {
     if (!isLiked) {
-      console.log('like')
       addLike(id);
     } else {
-      console.log('dislike')
       deleteLike(id);
     }
   }

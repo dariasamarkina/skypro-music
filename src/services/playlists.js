@@ -65,9 +65,9 @@ export const playlistApi = createApi({
       query: (id) => ({
         url: `catalog/track/${id}/favorite`,
         method: 'POST',
-        // headers: {
-        //   Authorization: `Bearer ${accessToken()}`,
-        // },
+        headers: {
+          Authorization: `Bearer ${accessToken()}`,
+        },
       }),
       invalidatesTags: [DATA_TAG],
     }),
