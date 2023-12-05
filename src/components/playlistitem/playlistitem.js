@@ -16,7 +16,7 @@ import { useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation, useGetAl
 export function PlaylistItem ({ track, album, author, link, title, albumLink, authorLink, titleSpan, time }) {
 
   const dispatch = useDispatch();
-
+  const currentUser = JSON.parse(localStorage.getItem('token'));
   const isPlaying = useSelector(selectIsPlaying);
   const currentTrack = useSelector(currentTrackSelector);
 
@@ -27,7 +27,10 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
     dispatch(setActivePlaylist(playlist));
   }
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(track.stared_user.includes(currentUser.id) ?? false);
+
+
+
   const [addFavoriteTrack] = useAddFavoriteTracksMutation();
   const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
   const navigate = useNavigate();
@@ -52,7 +55,8 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
   }
 
   useEffect(() => {
-    const currentUser = JSON.parse(localStorage.getItem('token'))
+    
+    console.log(currentUser)
     if (!track.stared_user) {
       setIsLiked(true);
       return;

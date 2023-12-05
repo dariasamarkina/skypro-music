@@ -25,7 +25,7 @@ export const Favorites = ({ isLoading }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { data, error } = useGetFavoriteTracksQuery();
+    const { data, isFetching, error } = useGetFavoriteTracksQuery();
     useEffect(() => {
         dispatch(setCurrentPlaylist(data));
         dispatch(setIsLoading(false));
@@ -72,7 +72,7 @@ export const Favorites = ({ isLoading }) => {
                         {error ? (
                             <p>Не удалось заргузить плейлист: {error.error}</p>
                         ) : (
-                            <Playlist tracks={data} />
+                            <Playlist isLoading={isLoading} isFetching={isFetching} tracks={data} />
                         )}
                         </S.CenterblockContent>
                     </S.MainCenterblock>

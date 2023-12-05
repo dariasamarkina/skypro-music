@@ -39,6 +39,7 @@ export function AuthPage({ isLoginMode = false }) {
         setBtnBlocked(true);
         const userData = await loginUser({ email, password });
         userData.token = await getAccessToken({ email, password });
+        console.log(userData);
         localStorage.setItem('token', JSON.stringify(userData))
         setToken(userData);
         navigate('/');
