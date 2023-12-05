@@ -39,8 +39,7 @@ export function AuthPage({ isLoginMode = false }) {
         setBtnBlocked(true);
         const userData = await loginUser({ email, password });
         userData.token = await getAccessToken({ email, password });
-        console.log(userData);
-        localStorage.setItem('token', JSON.stringify(userData))
+        localStorage.setItem('token', JSON.stringify(userData));
         setToken(userData);
         navigate('/');
         } 
@@ -92,7 +91,6 @@ export function AuthPage({ isLoginMode = false }) {
    }
   };
 
-  // Сбрасываем ошибку если пользователь меняет данные на форме или меняется режим формы
   useEffect(() => {
     setError(null);
   }, [isLoginMode, email, password, repeatPassword]);

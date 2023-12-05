@@ -6,7 +6,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; 
+import { useLocation, useNavigate } from 'react-router-dom'; 
 import * as S from './styles';
 import { userContext } from '../../context/userContext';
 import { selectIsPlaying, currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/script';
@@ -26,11 +26,11 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
     dispatch(setCurrentTrack(track));
     dispatch(setActivePlaylist(playlist));
   }
+  const { pathname } = useLocation();
+  const checkFavoritesPage = pathname==='/favorites';
+  const initialLiked = checkFavoritesPage? true : track.stared_user.includes(currentUser.id)
 
-  const [isLiked, setIsLiked] = useState(track.stared_user.includes(currentUser.id) ?? false);
-
-
-
+  const [isLiked, setIsLiked] = useState(initialLiked);
   const [addFavoriteTrack] = useAddFavoriteTracksMutation();
   const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
   const navigate = useNavigate();
@@ -55,9 +55,7 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
   }
 
   useEffect(() => {
-    
-    console.log(currentUser)
-    if (!track.stared_user) {
+        if (!track.stared_user) {
       setIsLiked(true);
       return;
     }

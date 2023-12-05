@@ -10,8 +10,6 @@ const accessToken = () => {
     return;
   };
 
-  console.log(accessToken.token.access)
-
   return accessToken.token.access;
 };
 
@@ -71,7 +69,7 @@ export const playlistApi = createApi({
           Authorization: `Bearer ${accessToken()}`,
         },
       }),
-      // invalidatesTags: [DATA_TAG],
+      invalidatesTags: [DATA_TAG],
     }),
 
     deleteFavoriteTracks: builder.mutation({

@@ -8,7 +8,6 @@
 /* eslint-disable arrow-body-style */
 import { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet } from 'react-router-dom';
 import { userContext } from '../../context/userContext';
 import * as S from './styles';
 import { Main } from "../../components/main/main";

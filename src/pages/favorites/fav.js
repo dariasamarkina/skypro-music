@@ -25,7 +25,11 @@ export const Favorites = ({ isLoading }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { data, isFetching, error } = useGetFavoriteTracksQuery();
+    const { data, isFetching, error, refetch } = useGetFavoriteTracksQuery();
+    useEffect(() => {
+        refetch();
+    }, [])
+
     useEffect(() => {
         dispatch(setCurrentPlaylist(data));
         dispatch(setIsLoading(false));
