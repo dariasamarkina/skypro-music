@@ -6,10 +6,14 @@
 
 import React from 'react';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import GlobalStyle from './styles';
 import * as S from './styles';
 import { AppRoutes } from "./routes";
 import { userContext } from './context/userContext';
+import { currentTrackSelector } from './store/selectors/script';
+import { Bar } from './components/bar/bar';
 
 function App() {
   const initialToken = localStorage.getItem('token', '');
@@ -21,13 +25,19 @@ function App() {
     const timer =setTimeout(changeState, 5000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, []);
+
+  const PlayTrack = useSelector(currentTrackSelector);
 
   return (
     <userContext.Provider value={{token, setToken}}>
       <S.Wrapper>
         <GlobalStyle />
         <AppRoutes token={token} setToken={setToken}/>
+        {
+          PlayTrack ? <Bar isLoading={isLoading}/> : null
+        }
+        <Outlet />
       </S.Wrapper>
     </userContext.Provider>
   )

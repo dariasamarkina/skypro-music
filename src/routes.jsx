@@ -13,6 +13,7 @@ import { Notfound } from "./pages/notfound/notfound";
 import { Favorites } from "./pages/favorites/fav";
 import { Categories } from "./pages/categories/categories";
 import { ProtectedRoute } from "./components/protectedroute/protectedroute";
+import { Main } from "./components/main/main";
 
 export const AppRoutes = () => {
   const {token, setToken} = useContext(userContext);
@@ -22,7 +23,7 @@ export const AppRoutes = () => {
 
       <Route path="/login" element={<AuthPage isLoginMode={true} setToken={setToken} />} />
       <Route path="/signup" element={<AuthPage isLoginMode={false} setToken={setToken}/>} />
-      
+
       <Route path="/" element={
           <ProtectedRoute >
             <Mainpage setToken={setToken}/>
