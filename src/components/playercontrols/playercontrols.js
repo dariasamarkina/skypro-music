@@ -7,8 +7,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from './style';
-import { playCurrentTrack, setIsPlayingTrack } from '../../store/actions/creators/script';
-import { currentPlayTrack, currentPlaylist } from '../../store/selectors/script';
+import { setCurrentTrack,setIsPlaying } from '../../store/slices/trackslice';
+import { currentTrackSelector, activePlaylistSelector } from '../../store/selectors/script';
 
 // eslint-disable-next-line import/prefer-default-export
 export function PlayerControls(
@@ -25,7 +25,7 @@ export function PlayerControls(
 
       const handleStop = () => {
         audioRef.current.pause();
-        dispatch(setIsPlayingTrack(false));
+        dispatch(setIsPlaying(false));
       }
     
       const togglePlay = isPlaying ? handleStop : handleStart
@@ -41,37 +41,38 @@ export function PlayerControls(
       }
     
       const toggleLoop = isLoop ? handleStopLoop : handleStartLoop;
+
       const toggleShuffle = () => {
         shuffle ? setShuffle(false) : setShuffle(true);
       } 
 
-      const playtrack = useSelector(currentPlayTrack);
-      const playlist = useSelector(currentPlaylist);
+      const playtrack = useSelector(currentTrackSelector);
+      const playlist = useSelector(activePlaylistSelector);
 
       const handleNextTrack = () => {
         if (playtrack) {
-          const number = playlist.indexOf(playtrack);
-          if (number < playlist.length - 1 && !shuffle) {
+          const number = playlist.findIndex(e => e.id === playtrack.id);
+          if (number > 0 && number < playlist.length - 1 && !shuffle) {
             const next = playlist[number + 1];
-            dispatch(playCurrentTrack(next));
+            dispatch(setCurrentTrack(next));
           } 
           else if (shuffle) {
             const next = playlist[shuffleTracks()];
-            dispatch(playCurrentTrack(next));
+            dispatch(setCurrentTrack(next));
           }
         }
       }
 
       const handlePrevTrack = () => {
         if (playtrack) {
-          const number = playlist.indexOf(playtrack);
-          if (number > 0 && !shuffle) {
+          const number = playlist.findIndex(e => e.id === playtrack.id);
+          if (number > 0 && number < playlist.length && !shuffle) {
             const prev = playlist[number - 1];
-            dispatch(playCurrentTrack(prev));
+            dispatch(setCurrentTrack(prev));
           } 
           else if (shuffle) {
             const next = playlist[shuffleTracks()];
-            dispatch(playCurrentTrack(next));
+            dispatch(setCurrentTrack(next));
           }
         }
       }

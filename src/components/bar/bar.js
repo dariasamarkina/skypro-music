@@ -5,21 +5,23 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable import/prefer-default-export */
 // eslint-disable-next-line no-unused-vars
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { userContext } from '../../context/userContext';
 import { Player } from '../player/player';
 import { PlayerControls } from '../playercontrols/playercontrols';
 import * as S from './styles';
 import ProgressBar from '../progressbar/progressbar';
-import { currentPlayTrack, currentIsPlaying, currentPlaylist } from '../../store/selectors/script';
-import { setIsPlayingTrack, playCurrentTrack } from '../../store/actions/creators/script';
+import { currentTrackSelector, selectIsPlaying, activePlaylistSelector } from '../../store/selectors/script';
+import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackslice';
 
 export function Bar({ isLoading }) {
 
-  const PlayTrack = useSelector(currentPlayTrack);
-  const isPlaying = useSelector(currentIsPlaying);
-  const playlist = useSelector(currentPlaylist);
-  const dispatch = useDispatch(setIsPlayingTrack);
+  const PlayTrack = useSelector(currentTrackSelector);
+  const isPlaying = useSelector(selectIsPlaying);
+  const playlist = useSelector(activePlaylistSelector);
+  const token = useContext(userContext);
+  const dispatch = useDispatch(setIsPlaying);
 
   const [isLoop, setIsLoop] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
@@ -32,12 +34,12 @@ export function Bar({ isLoading }) {
   const shuffleTracks = () => {
     const number = Math.floor(Math.random() * (playlist.length - 1));
     return number;
-  }
+  };
 
   const handleVolume = (event) => {
     audioRef.current.volume = event.target.value;
     setCurrentVolume(event.target.value);
-  }
+  };
 
   const handleAudioUpdate = () => {
     let totalMin = Math.floor(audioRef.current.duration / 60);
@@ -61,32 +63,40 @@ export function Bar({ isLoading }) {
   }
 
   const handleStart = () => {
-    audioRef.current?.play();
-    dispatch(setIsPlayingTrack(true));
-  }
+    if (localStorage.getItem('token', token)) {
+      dispatch(setIsPlaying(true));
+      audioRef.current?.play();
+    }
+  };
 
   useEffect(handleStart, [PlayTrack]);
 
   const handleNextTrack = () => {
-    if (PlayTrack) {
-      const number = playlist.indexOf(PlayTrack);
+    const number = playlist.findIndex(e => e.id === PlayTrack.id);
 
+    if (PlayTrack) {
       if (number < playlist.length - 1 && !shuffle) {
         const next = playlist[number + 1];
-        dispatch(playCurrentTrack(next));
+        dispatch(setCurrentTrack(next));
       } 
       else if (shuffle) {
         const next = playlist[shuffleTracks()];
-        dispatch(playCurrentTrack(next));
+        dispatch(setCurrentTrack(next));
       }
     }
   }
 
   const endTrack = () => {
+    const number = playlist.findIndex(e => e.id === PlayTrack.id);
+
     if (!isLoop) {
       handleNextTrack();
     }
-  }
+
+    if (number === playlist.length - 1) {
+      dispatch(setIsPlaying(false));
+    }
+  };
 
   return (
     PlayTrack.id && (

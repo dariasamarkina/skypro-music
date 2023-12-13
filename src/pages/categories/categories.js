@@ -11,31 +11,39 @@
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line arrow-body-style, import/no-unresolved
 import { useParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from "react";
+import { useDispatch } from "react-redux";
 import { CATEGORIES } from '../../components/sidebar/categories';
 import { userContext } from "../../context/userContext";
 import * as S from './styles';
+import { ContentTitlePlaylist } from "../../components/playlisttitle/playlisttitle";
+import { Playlist } from "../../components/playlist/playlist";
+import { selectIsPlaying } from "../../store/selectors/script";
 
-export const Categories = ({ setToken }) => {
+export const Categories = ({ isLoading }) => {
     const params = useParams();
-    const token = useContext(userContext);
+    const {token, setToken} = useContext(userContext);
+    const dispatch = useDispatch();
 
-    if (localStorage.getItem('token', token)) {
-        const category = CATEGORIES.find((category) => category.id === Number(params.id));;
+    const category = CATEGORIES.find((category) => category.id === Number(params.id));
 
-        return (
-            <S.Categories>
-                <h1>Подборка № {category.id}</h1>
-            </S.Categories>
-        )
-    } else {
-        const navigate = useNavigate();
-        useEffect(() => {
-            setToken(false);
-            navigate('/login', { replace: true })
-        }, [])
-     }
-    }
+        if (localStorage.getItem('token', token)) {
+            return (
+                <div>
+                    <S.CenterblockH2>Category Page: {category.id}</S.CenterblockH2>
+                    <S.CenterblockContent>
+                        <ContentTitlePlaylist isLoading={isLoading} />
+                        <Playlist isLoading={isLoading} />
+                    </S.CenterblockContent>
+                </div>
+            )
+                } else {
+                    useEffect(() => {
+                        setToken(false);
+                        dispatch(selectCurrentTrack({}));
+                        dispatch(selectIsPlaying(false));
+                    }, [])
+        }
+}
 
    

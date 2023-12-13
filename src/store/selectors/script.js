@@ -1,8 +1,16 @@
 /* eslint-disable import/prefer-default-export */
-const currentTrackSelector = (store) => store.currentTrack;
 
-export const currentPlayTrack = (store) => currentTrackSelector(store)?.track || [];
+export const allTracksSelector = (store) => store.currentPlay.allTracks;
 
-export const currentIsPlaying = (store) => currentTrackSelector(store)?.isPlaying;
+export const currentTrackSelector = (store) => store.currentPlay.currentTrack;
 
-export const currentPlaylist = (store) => currentTrackSelector(store)?.playlist || [];
+export const selectIsPlaying = (store) => store.currentPlay.isPlaying;
+
+export const currentPlaylistSelector = (store) => store.currentPlay.currentPlaylist;
+
+export const selectIsLoading = (store) => store.currentPlay.isLoading;
+
+export const currentTrackIndexSelector = (store) =>
+  store.currentPlay.currentTrack.id;
+
+export const activePlaylistSelector = (store) => store.currentPlay.activePlaylist;
