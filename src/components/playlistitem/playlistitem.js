@@ -12,6 +12,7 @@ import { userContext } from '../../context/userContext';
 import { selectIsPlaying, currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/script';
 import { setActivePlaylist, setCurrentPlaylist, setCurrentTrack, setIsLoading } from '../../store/slices/trackslice';
 import { useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation, useGetAllTracksQuery, useGetFavoriteTracksQuery } from '../../services/playlists';
+import { LikeButton } from '../likebutton/likebutton';
 
 export function PlaylistItem ({ track, album, author, link, title, albumLink, authorLink, titleSpan, time }) {
 
@@ -26,44 +27,44 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
     dispatch(setCurrentTrack(track));
     dispatch(setActivePlaylist(playlist));
   }
-  const { pathname } = useLocation();
-  const checkFavoritesPage = pathname==='/favorites';
-  const initialLiked = checkFavoritesPage? true : track.stared_user.includes(currentUser.id)
+  // const { pathname } = useLocation();
+  // const checkFavoritesPage = pathname==='/favorites';
+  // const initialLiked = checkFavoritesPage? true : track.stared_user.includes(currentUser.id)
 
-  const [isLiked, setIsLiked] = useState(initialLiked);
-  const [addFavoriteTrack] = useAddFavoriteTracksMutation();
-  const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
-  const navigate = useNavigate();
-  const { token, setToken } = useContext(userContext);
+  // const [isLiked, setIsLiked] = useState(initialLiked);
+  // const [addFavoriteTrack] = useAddFavoriteTracksMutation();
+  // const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
+  // const navigate = useNavigate();
+  // const { token, setToken } = useContext(userContext);
 
-  const addLike = async (id) => {
-    await addFavoriteTrack(id)
-    setIsLiked(true);
-  }
+  // const addLike = async (id) => {
+  //   await addFavoriteTrack(id)
+  //   setIsLiked(true);
+  // }
 
-  const deleteLike = async (id) => {
-    await deleteFavoriteTrack(id)
-    setIsLiked(false);
-  }
+  // const deleteLike = async (id) => {
+  //   await deleteFavoriteTrack(id)
+  //   setIsLiked(false);
+  // }
 
-  const toggleLikeDislike = (id) => {
-    if (!isLiked) {
-      addLike(id);
-    } else {
-      deleteLike(id);
-    }
-  }
+  // const toggleLikeDislike = (id) => {
+  //   if (!isLiked) {
+  //     addLike(id);
+  //   } else {
+  //     deleteLike(id);
+  //   }
+  // }
 
-  useEffect(() => {
-        if (!track.stared_user) {
-      setIsLiked(true);
-      return;
-    }
+  // useEffect(() => {
+  //       if (!track.stared_user) {
+  //     setIsLiked(true);
+  //     return;
+  //   }
 
-    if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
-      setIsLiked(true);
-    }
-  }, [track]);
+  //   if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
+  //     setIsLiked(true);
+  //   }
+  // }, [track]);
 
   function convertTime(time) {
     const min = Math.floor(time / 60);
@@ -105,28 +106,7 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
             </S.TrackAlbumLink>
           </S.TrackAlbum>
           <div className="track__time">
-            <S.TrackTimeSvg alt="time" onClick={(e) => {
-              toggleLikeDislike(track.id)
-              e.stopPropagation()}}>
-              {isLiked ? (
-                <svg
-                width="16"
-                height="14"
-                viewBox="0 0 16 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.02203 12.7031C13.9025 9.20312 16.9678 3.91234 13.6132 1.47046C11.413 -0.13111 8.95392 1.14488 8.02203 1.95884H8.00052H8.00046H7.97895C7.04706 1.14488 4.58794 -0.13111 2.38775 1.47046C-0.966814 3.91234 2.09846 9.20312 7.97895 12.7031H8.00046H8.00052H8.02203Z"
-                  fill="#B672FF"
-                />
-                <path
-                  d="M8.00046 1.95884H8.02203C8.95392 1.14488 11.413 -0.13111 13.6132 1.47046C16.9678 3.91234 13.9025 9.20312 8.02203 12.7031H8.00046M8.00052 1.95884H7.97895C7.04706 1.14488 4.58794 -0.13111 2.38775 1.47046C-0.966814 3.91234 2.09846 9.20312 7.97895 12.7031H8.00052"
-                  stroke="#B672FF"
-                />
-              </svg>
-              ) : (<use xlinkHref="img/icon/sprite.svg#icon-like" />)}
-            </S.TrackTimeSvg>
+            <LikeButton track = {track} />
             <S.TrackTimeText className="track__time-text">
               {convertTime(time)}
             </S.TrackTimeText>

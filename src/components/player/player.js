@@ -3,6 +3,7 @@
 import React from 'react';
 import * as S from './styles';
 import { SkeletonPlayer } from '../skeleton/skeleton';
+import { LikeButton } from '../likebutton/likebutton';
 
 function TrackPlayerLoaded({ PlayTrack }) {
   return <S.TrackPlaycontain>
@@ -30,16 +31,7 @@ export function Player({ isLoading, PlayTrack }) {
     <S.PlayerTrackPlay>
       {isLoading ? <SkeletonPlayer/> : <TrackPlayerLoaded PlayTrack={PlayTrack}/>}
       <S.TrackPlayLikeDis>
-        <S.TrackPlayLike>
-          <S.TrackPlayLikeSvg alt="like">
-            <use xlinkHref="img/icon/sprite.svg#icon-like" />
-          </S.TrackPlayLikeSvg>
-        </S.TrackPlayLike>
-        <S.TrackPlayDislike>
-          <S.TrackPlayDislikeSvg alt="dislike">
-            <use xlinkHref="img/icon/sprite.svg#icon-dislike" />
-          </S.TrackPlayDislikeSvg>
-        </S.TrackPlayDislike>
+        <LikeButton track = {PlayTrack} />
       </S.TrackPlayLikeDis>
     </S.PlayerTrackPlay>
   )
