@@ -14,3 +14,7 @@ export const currentTrackIndexSelector = (store) =>
   store.currentPlay.currentTrack.id;
 
 export const activePlaylistSelector = (store) => store.currentPlay.activePlaylist;
+
+export const filtersSelector = (store) => store.currentPlay.filters;
+
+export const filteredPlaylistSelector = (store) => store.currentPlay.filteredPlaylist;

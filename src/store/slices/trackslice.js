@@ -9,6 +9,14 @@ const initialState = {
     activePlaylist: {},
     isPlaying: false,
     isLoading: true,
+    filters: {
+        status: false,
+        authors: '',
+        years: false,
+        genre: '',
+        searchValue: '',
+    },
+    filteredPlaylist: [],
 };
 
 export const trackSLice = createSlice({
@@ -39,6 +47,14 @@ export const trackSLice = createSlice({
         setActivePlaylist: (state, action) => {
             state.activePlaylist = action.payload
         },
+
+        setFilters: (state, action) => {
+            state.filters = action.payload
+        },
+
+        setFilteredPlaylist: (state, action) => {
+            state.filteredPlaylist = action.payload
+        },
     }
 })
 
@@ -48,7 +64,9 @@ export const {
     setIsPlaying, 
     setIsLoading, 
     setCurrentPlaylist, 
-    setActivePlaylist 
-} = trackSLice.actions;
+    setActivePlaylist,
+    setFilters,
+    setFilteredPlaylist 
+    } = trackSLice.actions;
 
 export default trackSLice.reducer;

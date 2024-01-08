@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-else-return */
 /* eslint-disable no-undef */
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import * as S from './styles';
 import { Navigation } from '../navmenu/nav';
@@ -9,13 +9,19 @@ import { Filter } from '../filter/filter';
 import { ContentTitlePlaylist } from '../playlisttitle/playlisttitle';
 import { Playlist } from "../playlist/playlist";
 import { Sidebar } from "../sidebar/sidebar";
+import { filtersSelector } from '../../store/selectors/script';
 import { useGetAllTracksQuery } from '../../services/playlists';
-import { setCurrentPlaylist, setIsLoading } from '../../store/slices/trackslice';
+import { setCurrentPlaylist, setIsLoading, setFilters } from '../../store/slices/trackslice';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Main({ isLoading, setToken }) {
-  // const {token, setToken} = useContext(userContext);
   const dispatch = useDispatch();
+
+  const filters = useSelector(filtersSelector)
+
+  const searchFilter = (event) => {
+    dispatch(setFilters({ ...filters, searchValue: event.target.value, status: true }))
+  }
 
   const { data, isFetching } = useGetAllTracksQuery();
 
@@ -36,6 +42,7 @@ export function Main({ isLoading, setToken }) {
               type="search"
               placeholder="Поиск"
               name="search"
+              onChange={(event) => searchFilter(event)}
             />
           </S.CenterblockSearch>
           <S.CenterblockH2>Треки</S.CenterblockH2>
