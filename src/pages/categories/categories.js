@@ -11,23 +11,23 @@
 /* eslint-disable react/button-has-type */
 // eslint-disable-next-line arrow-body-style, import/no-unresolved
 import { useParams } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-// import { CATEGORIES } from '../../components/sidebar/categories';
 import { userContext } from "../../context/userContext";
 import * as S from './styles';
 import { ContentTitlePlaylist } from "../../components/playlisttitle/playlisttitle";
 import { Playlist } from "../../components/playlist/playlist";
-import { selectIsPlaying } from "../../store/selectors/script";
+// import { selectIsPlaying } from "../../store/selectors/script";
 import { useGetSelectionByIdQuery } from "../../services/playlists";
-import { setCurrentPlaylist, setIsLoading } from "../../store/slices/trackslice";
+import { setCurrentPlaylist, setIsLoading, setCurrentTrack, setIsPlaying } from "../../store/slices/trackslice";
+import { Navigation } from '../../components/navmenu/nav';
 
 export const Categories = ({ isLoading }) => {
     const params = useParams();
     const {token, setToken} = useContext(userContext);
     const dispatch = useDispatch();
-
-    // const category = CATEGORIES.find((category) => category.id === Number(params.id));
+    const navigate = useNavigate();
 
     const { data: currentCategory } = useGetSelectionByIdQuery(Number(params.id));
 
@@ -36,21 +36,53 @@ export const Categories = ({ isLoading }) => {
         dispatch(setIsLoading(false));
     }, [currentCategory]);
 
+    const handleLogOut = () => {
+        localStorage.clear();
+        setToken(false);
+        dispatch(setCurrentTrack(null));
+        dispatch(setIsPlaying(false));
+        navigate('/login');
+      }
+
         if (localStorage.getItem('token', token)) {
             return (
-                <div>
-                    <S.CenterblockH2>Category Page: {currentCategory?.name}</S.CenterblockH2>
-                    <S.CenterblockContent>
+                <S.Main>
+                    <Navigation setToken={setToken}/>
+                    <S.MainCenterblock>
+                        <S.HeaderBlock>
+                            <S.CenterblockSearch>
+                                <S.SearchSvg>
+                                <use xlinkHref="img/icon/sprite.svg#icon-search" />
+                                </S.SearchSvg>
+                                <S.SearchText
+                                type="search"
+                                placeholder="Поиск"
+                                name="search"
+                                />
+                            </S.CenterblockSearch>
+
+                            <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
+                                <Link to="/login">
+                                    <svg alt="logout">
+                                    <use xlinkHref="img/icon/sprite.svg#logout" />
+                                    </svg>
+                                </Link>
+                            </S.SidebarIcon>
+                    </S.HeaderBlock>
+
+                        <S.CenterblockH2>{currentCategory?.name}</S.CenterblockH2>
+                        <S.CenterblockContent>
                         <ContentTitlePlaylist isLoading={isLoading} />
                         <Playlist tracks={currentCategory?.items} />
-                    </S.CenterblockContent>
-                </div>
+                        </S.CenterblockContent>
+                    </S.MainCenterblock>
+            </S.Main>
             )
                 } else {
                     useEffect(() => {
                         setToken(false);
-                        dispatch(selectCurrentTrack({}));
-                        dispatch(selectIsPlaying(false));
+                        dispatch(setCurrentTrack({}));
+                        dispatch(setIsPlaying(false));
                     }, [])
         }
 }

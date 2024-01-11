@@ -10,12 +10,12 @@ export function LikeButton({ track }) {
     const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
 
     const userId = JSON.parse(localStorage.getItem('token')).id;
-    const isLike = Boolean(track.stared_user ? track.stared_user.find(({ id }) => id === userId) : []);
+    // const isLike = Boolean(track.stared_user ? track.stared_user.find(({ id }) => id === userId) : []);
 
     useEffect(() => {
-      setIsLiked(isLike)
-      }, [isLike, track]
-    );
+      const isLike = Boolean(
+        track.stared_user ? track.stared_user.find(({ id }) => id === userId) : [],)
+        setIsLiked(isLike)}, [track]);
 
     const addLike = async (id) => {
         await addFavoriteTrack(id)

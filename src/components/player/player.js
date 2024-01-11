@@ -8,9 +8,9 @@ import { LikeButton } from '../likebutton/likebutton';
 function TrackPlayerLoaded({ PlayTrack }) {
   return <S.TrackPlaycontain>
       <S.TrackPlayImage>
-        <S.TraclPlaySvg alt="music">
+        <S.TrackPlaySvg alt="music">
           <use xlinkHref="img/icon/sprite.svg#icon-note" />
-        </S.TraclPlaySvg>
+        </S.TrackPlaySvg>
       </S.TrackPlayImage>
       <S.TrackPlayAuthor>
         <S.TrackPlatAuthorLink href="http://">

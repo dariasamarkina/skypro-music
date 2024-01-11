@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-else-return */
 /* eslint-disable no-undef */
@@ -9,9 +12,9 @@ import { Filter } from '../filter/filter';
 import { ContentTitlePlaylist } from '../playlisttitle/playlisttitle';
 import { Playlist } from "../playlist/playlist";
 import { Sidebar } from "../sidebar/sidebar";
-import { filtersSelector } from '../../store/selectors/script';
+import { filtersSelector, currentPlaylistSelector, currentTrackSelector } from '../../store/selectors/script';
 import { useGetAllTracksQuery } from '../../services/playlists';
-import { setCurrentPlaylist, setIsLoading, setFilters } from '../../store/slices/trackslice';
+import { setCurrentPlaylist, setIsLoading, setFilters, setCurrentTrack } from '../../store/slices/trackslice';
 
 // eslint-disable-next-line import/prefer-default-export
 export function Main({ isLoading, setToken }) {
@@ -24,11 +27,6 @@ export function Main({ isLoading, setToken }) {
   }
 
   const { data, isFetching } = useGetAllTracksQuery();
-
-  useEffect(() => {
-    dispatch(setCurrentPlaylist(data));
-    dispatch(setIsLoading(false))
-  }, [data])
 
     return (
       <S.Main>

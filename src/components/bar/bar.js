@@ -18,6 +18,11 @@ import { setCurrentTrack, setIsPlaying } from '../../store/slices/trackslice';
 export function Bar({ isLoading }) {
 
   const PlayTrack = useSelector(currentTrackSelector);
+
+  useEffect(() => {
+    console.log('==', PlayTrack)
+  }, [PlayTrack]);
+
   const isPlaying = useSelector(selectIsPlaying);
   const playlist = useSelector(activePlaylistSelector);
   const token = useContext(userContext);
