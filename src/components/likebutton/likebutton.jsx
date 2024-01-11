@@ -1,14 +1,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import React, { useEffect, useState } from "react";
-import { useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation, useGetFavoriteTracksQuery } from "../../services/playlists";
+import { useAddFavoriteTracksMutation, useDeleteFavoriteTracksMutation } from "../../services/playlists";
 import { TrackTimeSvg } from "../playlistitem/styles";
 
 export function LikeButton({ track }) { 
-    const { data: favTracks } = useGetFavoriteTracksQuery();
     const [isLiked,  setIsLiked] = useState(false);
     const [addFavoriteTrack] = useAddFavoriteTracksMutation();
     const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
+
+    const userId = JSON.parse(localStorage.getItem('token')).id;
+    const isLike = Boolean(track.stared_user ? track.stared_user.find(({ id }) => id === userId) : []);
+
+    useEffect(() => {
+      setIsLiked(isLike)
+      }, [isLike, track]
+    );
 
     const addLike = async (id) => {
         await addFavoriteTrack(id)
@@ -28,17 +35,17 @@ export function LikeButton({ track }) {
         }
     };
 
-    useEffect(() => {
-        const currentUser = JSON.parse(localStorage.getItem('token'));
-        if (!track.stared_user) {
-            setIsLiked(true);
-            return;
-        };
+    // useEffect(() => {
+    //     const currentUser = JSON.parse(localStorage.getItem('token'));
+    //     if (!track.stared_user) {
+    //         setIsLiked(true);
+    //         return;
+    //     };
 
-        if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
-            setIsLiked(true);
-        }
-    }, [track]);
+    //     if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
+    //         setIsLiked(true);
+    //     }
+    // }, [track]);
 
     return (
         <TrackTimeSvg alt="time" 

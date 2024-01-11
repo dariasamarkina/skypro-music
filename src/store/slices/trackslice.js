@@ -12,7 +12,7 @@ const initialState = {
     filters: {
         status: false,
         authors: '',
-        years: false,
+        years: 'По умолчанию',
         genre: '',
         searchValue: '',
     },
