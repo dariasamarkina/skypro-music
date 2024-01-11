@@ -27,45 +27,7 @@ export function PlaylistItem ({ track, album, author, link, title, albumLink, au
     dispatch(setCurrentTrack(track));
     dispatch(setActivePlaylist(playlist));
   }
-  // const { pathname } = useLocation();
-  // const checkFavoritesPage = pathname==='/favorites';
-  // const initialLiked = checkFavoritesPage? true : track.stared_user.includes(currentUser.id)
-
-  // const [isLiked, setIsLiked] = useState(initialLiked);
-  // const [addFavoriteTrack] = useAddFavoriteTracksMutation();
-  // const [deleteFavoriteTrack] = useDeleteFavoriteTracksMutation();
-  // const navigate = useNavigate();
-  // const { token, setToken } = useContext(userContext);
-
-  // const addLike = async (id) => {
-  //   await addFavoriteTrack(id)
-  //   setIsLiked(true);
-  // }
-
-  // const deleteLike = async (id) => {
-  //   await deleteFavoriteTrack(id)
-  //   setIsLiked(false);
-  // }
-
-  // const toggleLikeDislike = (id) => {
-  //   if (!isLiked) {
-  //     addLike(id);
-  //   } else {
-  //     deleteLike(id);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //       if (!track.stared_user) {
-  //     setIsLiked(true);
-  //     return;
-  //   }
-
-  //   if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
-  //     setIsLiked(true);
-  //   }
-  // }, [track]);
-
+  
   function convertTime(time) {
     const min = Math.floor(time / 60);
     let sec = Math.floor(time % 60);

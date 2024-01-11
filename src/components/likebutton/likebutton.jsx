@@ -35,18 +35,6 @@ export function LikeButton({ track }) {
         }
     };
 
-    // useEffect(() => {
-    //     const currentUser = JSON.parse(localStorage.getItem('token'));
-    //     if (!track.stared_user) {
-    //         setIsLiked(true);
-    //         return;
-    //     };
-
-    //     if (track?.stared_user?.find((user) => user.id === currentUser.id)) {
-    //         setIsLiked(true);
-    //     }
-    // }, [track]);
-
     return (
         <TrackTimeSvg alt="time" 
             onClick={(e) => {
