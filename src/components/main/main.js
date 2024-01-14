@@ -27,6 +27,11 @@ export function Main({ isLoading, setToken }) {
 
   const { data, isFetching } = useGetAllTracksQuery();
 
+  useEffect(() => {
+    dispatch(setCurrentPlaylist(data));
+    dispatch(setIsLoading(false));
+  }, [data]);
+
     return (
       <S.Main>
         <Navigation setToken={setToken}/>

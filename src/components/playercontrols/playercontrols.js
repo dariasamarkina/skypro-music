@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-useless-return */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -8,7 +9,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as S from './style';
 import { setCurrentTrack,setIsPlaying } from '../../store/slices/trackslice';
-import { currentTrackSelector, activePlaylistSelector } from '../../store/selectors/script';
+import { currentTrackSelector, activePlaylistSelector, currentPlaylistSelector, allTracksSelector } from '../../store/selectors/script';
 
 // eslint-disable-next-line import/prefer-default-export
 export function PlayerControls(
@@ -55,7 +56,10 @@ export function PlayerControls(
           if (number > 0 && number < playlist.length - 1 && !shuffle) {
             const next = playlist[number + 1];
             dispatch(setCurrentTrack(next));
-          } 
+          } else if (number === 0 && !shuffle) {
+            const next = playlist[1];
+            dispatch(setCurrentTrack(next));
+          }
           else if (shuffle) {
             const next = playlist[shuffleTracks()];
             dispatch(setCurrentTrack(next));

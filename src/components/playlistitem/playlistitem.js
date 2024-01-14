@@ -17,7 +17,6 @@ import { LikeButton } from '../likebutton/likebutton';
 export function PlaylistItem ({ track, album, author, link, title, albumLink, authorLink, titleSpan, time }) {
 
   const dispatch = useDispatch();
-  const currentUser = JSON.parse(localStorage.getItem('token'));
   const isPlaying = useSelector(selectIsPlaying);
   const currentTrack = useSelector(currentTrackSelector);
 
