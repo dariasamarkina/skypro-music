@@ -10,20 +10,26 @@
 // eslint-disable-next-line arrow-body-style, import/no-unresolved
 
 import { useEffect, useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../context/userContext';
 import { ContentTitlePlaylist } from '../../components/playlisttitle/playlisttitle'; 
 import { Playlist } from '../../components/playlist/playlist';
 import * as S from './styles';
-import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist } from '../../store/slices/trackslice';
+import { setCurrentTrack, setIsPlaying, setIsLoading, setCurrentPlaylist, setFilters } from '../../store/slices/trackslice';
 import { useGetFavoriteTracksQuery } from '../../services/playlists';
 import { Navigation } from '../../components/navmenu/nav';
+import { filtersSelector } from '../../store/selectors/script';
 
 export const Favorites = ({ isLoading }) => {
     const { token, setToken } = useContext(userContext);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const filters = useSelector(filtersSelector);
+
+    const searchFilter = (event) => {
+        dispatch(setFilters({ ...filters, searchValue: event.target.value, status: true }))
+      }
 
     const { data, isFetching, error, refetch } = useGetFavoriteTracksQuery();
     useEffect(() => {
@@ -58,6 +64,7 @@ export const Favorites = ({ isLoading }) => {
                                 type="search"
                                 placeholder="Поиск"
                                 name="search"
+                                onChange={(event) => searchFilter(event)}
                                 />
                             </S.CenterblockSearch>
 

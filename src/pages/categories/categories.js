@@ -13,14 +13,14 @@
 import { useParams } from "react-router-dom";
 import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userContext } from "../../context/userContext";
 import * as S from './styles';
 import { ContentTitlePlaylist } from "../../components/playlisttitle/playlisttitle";
 import { Playlist } from "../../components/playlist/playlist";
-// import { selectIsPlaying } from "../../store/selectors/script";
+import { filtersSelector } from "../../store/selectors/script";
 import { useGetSelectionByIdQuery } from "../../services/playlists";
-import { setCurrentPlaylist, setIsLoading, setCurrentTrack, setIsPlaying } from "../../store/slices/trackslice";
+import { setCurrentPlaylist, setIsLoading, setCurrentTrack, setIsPlaying, setFilters } from "../../store/slices/trackslice";
 import { Navigation } from '../../components/navmenu/nav';
 
 export const Categories = ({ isLoading }) => {
@@ -28,6 +28,11 @@ export const Categories = ({ isLoading }) => {
     const {token, setToken} = useContext(userContext);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const filters = useSelector(filtersSelector);
+
+    const searchFilter = (event) => {
+        dispatch(setFilters({ ...filters, searchValue: event.target.value, status: true }))
+    }
 
     const { data: currentCategory } = useGetSelectionByIdQuery(Number(params.id));
 
@@ -58,6 +63,7 @@ export const Categories = ({ isLoading }) => {
                                 type="search"
                                 placeholder="Поиск"
                                 name="search"
+                                onChange={(event) => searchFilter(event)}
                                 />
                             </S.CenterblockSearch>
 

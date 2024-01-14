@@ -47,7 +47,7 @@ function PerformerListFilter({ countFilterAuthor, setCountFilterAuthor }) {
     setCountFilterAuthor(--countFilterAuthor);
 
     if (!deletedAuthor.authors.length) {
-      dispatch(setFilters({ ...filters, status: false, authors: '' }));
+      dispatch(setFilters({ ...filters, authors: '' }));
       setCountFilterAuthor(0);
     }
   }

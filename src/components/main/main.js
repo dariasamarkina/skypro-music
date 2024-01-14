@@ -19,7 +19,7 @@ import { setCurrentPlaylist, setIsLoading, setFilters, setCurrentTrack } from '.
 // eslint-disable-next-line import/prefer-default-export
 export function Main({ isLoading, setToken }) {
   const dispatch = useDispatch();
-  const filters = useSelector(filtersSelector)
+  const filters = useSelector(filtersSelector);
 
   const searchFilter = (event) => {
     dispatch(setFilters({ ...filters, searchValue: event.target.value, status: true }))
