@@ -9,7 +9,7 @@ export function ContentTitlePlaylist() {
       <S.PlaylistTitleCol03>АЛЬБОМ</S.PlaylistTitleCol03>
       <S.PlaylistTitleCol04>
         <S.PlaylistTitleSvg alt="time">
-          <use xlinkHref="img/icon/sprite.svg#icon-watch" />
+          <use xlinkHref="/img/icon/sprite.svg#icon-watch" />
         </S.PlaylistTitleSvg>
       </S.PlaylistTitleCol04>
     </S.ContentTitle>

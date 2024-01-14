@@ -57,7 +57,7 @@ export function LikeButton({ track }) {
           />
         </svg>
       ) : (
-        <use xlinkHref="img/icon/sprite.svg#icon-like" />
+        <use xlinkHref="/img/icon/sprite.svg#icon-like" />
       )}
     </TrackTimeSvg>
     )

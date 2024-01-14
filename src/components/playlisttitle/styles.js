@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ContentTitle = styled.div`
+  width: 1080px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

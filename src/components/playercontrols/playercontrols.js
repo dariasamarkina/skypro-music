@@ -82,7 +82,7 @@ export function PlayerControls(
 
       <S.PlayerButtonPrev>
         <S.PlayerButtonPrevSvg alt="prev" onClick={handlePrevTrack}>
-          <use xlinkHref="img/icon/sprite.svg#icon-prev" />
+          <use xlinkHref="/img/icon/sprite.svg#icon-prev" />
         </S.PlayerButtonPrevSvg>
       </S.PlayerButtonPrev>
 
@@ -100,14 +100,14 @@ export function PlayerControls(
               <rect x="10" width="5" height="19" fill="#D9D9D9" />
             </svg>
           ) : (
-            <use xlinkHref="img/icon/sprite.svg#icon-play" />
+            <use xlinkHref="/img/icon/sprite.svg#icon-play" />
           )}
         </S.PlayerButtonPlaySvg>
       </S.PlayerButtonPlay>
 
       <S.PlayerButtonPlayNext onClick={handleNextTrack}>
         <S.PlayerButtonPlayNextSvg alt="next">
-          <use xlinkHref="img/icon/sprite.svg#icon-next" />
+          <use xlinkHref="/img/icon/sprite.svg#icon-next" />
         </S.PlayerButtonPlayNextSvg>
       </S.PlayerButtonPlayNext>
 
@@ -131,7 +131,7 @@ export function PlayerControls(
           </svg>
         ) : (
         <S.PlayerButtonPlayRepeatSvg alt="repeat">
-          <use xlinkHref="img/icon/sprite.svg#icon-repeat" />
+          <use xlinkHref="/img/icon/sprite.svg#icon-repeat" />
         </S.PlayerButtonPlayRepeatSvg>)}
       </S.PlayerButtonPlayRepeat>
 
@@ -143,7 +143,7 @@ export function PlayerControls(
           </svg>
         ) : (
         <S.PlayerButtonPlayShuffleSvg alt="shuffle">
-          <use xlinkHref="img/icon/sprite.svg#icon-shuffle" />
+          <use xlinkHref="/img/icon/sprite.svg#icon-shuffle" />
         </S.PlayerButtonPlayShuffleSvg>)}
       </S.PlayerButtonPlayShuffle>
 

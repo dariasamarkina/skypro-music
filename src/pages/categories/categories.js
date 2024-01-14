@@ -57,7 +57,7 @@ export const Categories = ({ isLoading }) => {
                         <S.HeaderBlock>
                             <S.CenterblockSearch>
                                 <S.SearchSvg>
-                                <use xlinkHref="img/icon/sprite.svg#icon-search" />
+                                <use xlinkHref="/img/icon/sprite.svg#icon-search" />
                                 </S.SearchSvg>
                                 <S.SearchText
                                 type="search"
@@ -70,7 +70,7 @@ export const Categories = ({ isLoading }) => {
                             <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
                                 <Link to="/login">
                                     <svg alt="logout">
-                                    <use xlinkHref="img/icon/sprite.svg#logout" />
+                                    <use xlinkHref="/img/icon/sprite.svg#logout" />
                                     </svg>
                                 </Link>
                             </S.SidebarIcon>
