@@ -37,9 +37,6 @@ export const Mainpage = () => {
                 <Main 
                     isLoading={isLoading} 
                     setToken={setToken}/>
-                
-                {/* {PlayTrack ? <Bar isLoading={isLoading}/> : null}
-                <Outlet /> */}
             </S.Container>
         )
     }
