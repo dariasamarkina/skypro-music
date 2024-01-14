@@ -54,21 +54,17 @@ export function Sidebar() {
     dispatch(setCurrentTrack(null));
     dispatch(setIsPlaying(false));
     navigate('/login');
-  }
+  };
 
   const userData = JSON.parse(localStorage.getItem('token'));
-  const userName = userData.username;
 
   return (
     <S.MainSidebar>
       <S.SidebarPersonal>
-        <S.SidebarPersonalName>
-          {isLoading ? '' : userName}
-        </S.SidebarPersonalName>
         <S.SidebarIcon className="sidebar__icon" onClick={handleLogOut}>
           <Link to="/login">
             <svg alt="logout">
-              <use xlinkHref="img/icon/sprite.svg#logout" />
+              <use xlinkHref="/img/icon/sprite.svg#logout" />
             </svg>
           </Link>
         </S.SidebarIcon>

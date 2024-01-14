@@ -102,6 +102,8 @@ export const MainCenterblock = styled.div`
 export const HeaderBlock = styled.div`
   display: flex;
   gap: 200px;
+  magrin-top: 36px;
+  padding-right: 60px;
 `
 
 export const Categories = styled.div`

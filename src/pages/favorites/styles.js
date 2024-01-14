@@ -3,6 +3,7 @@
 import { styled } from 'styled-components';
 
 export const Main = styled.main`
+
   background: #181818;
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
@@ -102,6 +103,8 @@ export const MainCenterblock = styled.div`
 export const HeaderBlock = styled.div`
   display: flex;
   gap: 200px;
+  magrin-top: 36px;
+  padding-right: 60px;
 `
 
 export const CenterblockH2 = styled.h2`
@@ -111,6 +114,7 @@ export const CenterblockH2 = styled.h2`
   line-height: 72px;
   letter-spacing: -0.8px;
   margin-bottom: 45px;
+
 }
 `;
 
@@ -131,4 +135,5 @@ export const SidebarIcon = styled.div`
   background-color: #313131;
   border-radius: 50%;
   cursor: pointer;
+
 `;
